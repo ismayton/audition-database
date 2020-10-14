@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_14_003250) do
+ActiveRecord::Schema.define(version: 2020_10_14_020624) do
 
   create_table "composers", force: :cascade do |t|
     t.string "name"
@@ -34,8 +34,10 @@ ActiveRecord::Schema.define(version: 2020_10_14_003250) do
   create_table "lists", force: :cascade do |t|
     t.string "date"
     t.integer "position_id"
+    t.integer "orchestra_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["orchestra_id"], name: "index_lists_on_orchestra_id"
     t.index ["position_id"], name: "index_lists_on_position_id"
   end
 
@@ -56,6 +58,15 @@ ActiveRecord::Schema.define(version: 2020_10_14_003250) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "excerpts", "composers"
+  add_foreign_key "lists", "orchestras"
   add_foreign_key "lists", "positions"
 end

@@ -3,7 +3,7 @@ class CreateLists < ActiveRecord::Migration[6.0]
     create_table :lists do |t|
       t.string :date
       t.belongs_to :position, foreign_key: true
-
+      t.belongs_to :orchestra, foreign_key: true
       t.timestamps
     end
   end

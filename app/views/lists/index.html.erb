@@ -1,0 +1,10 @@
+<% @lists.each do |t| %>
+    <h4><%= full_position(t) %></h4>
+
+    <ul>
+    <% t.excerpts.each do |e| %>
+        <li><%= e.title %> - <%= e.composer.name %></li>
+    <% end %>
+    </ul>
+
+<% end %>

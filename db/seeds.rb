@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
 excerpt = Excerpt.find_or_create_by(title: "Ein Heldenleben")
 excerpt.composer = Composer.find_or_create_by(name: "Ricard Strauss")
 excerpt.save
@@ -19,6 +20,7 @@ list.excerpts << Excerpt.all
 list.save
 
 position.lists << list
+orchestra.lists << list
 position.save
 
 

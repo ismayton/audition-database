@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  
+  root to: 'sessions#index'
+  get '/login', to: 'sessions#login'
+  get '/signup', to: 'sessions#signup'
+
   resources :orchestras
   resources :positions
   resources :lists
