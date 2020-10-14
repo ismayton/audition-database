@@ -1,7 +1,4 @@
 class List < ApplicationRecord
-    belongs_to :position 
-    has_many :excerpts
-    has_many :composers, through: :excerpts
-    has_many :rounds
-    
+  belongs_to :position
+  has_and_belongs_to_many :excerpts
 end

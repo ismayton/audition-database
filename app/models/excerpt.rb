@@ -1,5 +1,4 @@
 class Excerpt < ApplicationRecord
-    has_many :lists
-    has_many :rounds 
-    belongs_to :composer
+  belongs_to :composer
+  has_and_belongs_to_many :lists
 end

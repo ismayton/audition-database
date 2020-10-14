@@ -1,5 +1,4 @@
 class Orchestra < ApplicationRecord
-    has_many :positions
+    has_and_belongs_to_many :positions
     has_many :lists, through: :positions
-    
 end

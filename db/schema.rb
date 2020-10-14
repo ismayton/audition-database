@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_12_193537) do
+ActiveRecord::Schema.define(version: 2020_10_14_003250) do
 
   create_table "composers", force: :cascade do |t|
     t.string "name"
@@ -20,14 +20,23 @@ ActiveRecord::Schema.define(version: 2020_10_12_193537) do
 
   create_table "excerpts", force: :cascade do |t|
     t.string "title"
+    t.integer "composer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["composer_id"], name: "index_excerpts_on_composer_id"
+  end
+
+  create_table "excerpts_lists", id: false, force: :cascade do |t|
+    t.integer "list_id", null: false
+    t.integer "excerpt_id", null: false
   end
 
   create_table "lists", force: :cascade do |t|
-    t.datetime "date"
+    t.string "date"
+    t.integer "position_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["position_id"], name: "index_lists_on_position_id"
   end
 
   create_table "orchestras", force: :cascade do |t|
@@ -36,26 +45,17 @@ ActiveRecord::Schema.define(version: 2020_10_12_193537) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "orchestras_positions", id: false, force: :cascade do |t|
+    t.integer "orchestra_id", null: false
+    t.integer "position_id", null: false
+  end
+
   create_table "positions", force: :cascade do |t|
     t.string "title"
-    t.string "instrument"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "rounds", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password_digest"
-    t.boolean "admin", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
+  add_foreign_key "excerpts", "composers"
+  add_foreign_key "lists", "positions"
 end
