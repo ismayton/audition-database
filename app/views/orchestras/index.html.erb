@@ -1,3 +1,9 @@
 <% @orchestras.each do |t| %>
-    <h4><%= t.name %></h4>
+    <h2><%= link_to "#{t.name}", orchestra_path(t) %></h2>
+    <h4>Auditions:</h4>
+    <ul>
+        <% t.lists.each do |l| %>
+            <li><%= link_to "#{l.position.title}", list_path(l) %> - <%= l.date %></li> 
+        <% end %>
+    </ul>
 <% end %>

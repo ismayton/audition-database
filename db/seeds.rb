@@ -6,25 +6,23 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+def test_db
+    excerpt = Excerpt.find_or_create_by(title: "Ein Heldenleben")
+    excerpt.composer = Composer.find_or_create_by(name: "Ricard Strauss")
+    excerpt.save
 
-excerpt = Excerpt.find_or_create_by(title: "Ein Heldenleben")
-excerpt.composer = Composer.find_or_create_by(name: "Ricard Strauss")
-excerpt.save
+    position = Position.find_or_create_by(title: "Second Horn")
+    orchestra = Orchestra.find_or_create_by(name: "Philadelphia Orchestra")
+    orchestra.positions << position
 
-position = Position.find_or_create_by(title: "Second Horn")
-orchestra = Orchestra.find_or_create_by(name: "Philadelphia Orchestra")
-orchestra.positions << position
+    list = List.find_or_create_by(date: "Today")
+    list.excerpts << Excerpt.all 
+    list.save
 
-list = List.find_or_create_by(date: "Today")
-list.excerpts << Excerpt.all 
-list.save
-
-position.lists << list
-orchestra.lists << list
-position.save
-
-
-
+    position.lists << list
+    orchestra.lists << list
+    position.save
+end
 
 # sections_list = {
 #     "Violin" => {},
@@ -45,74 +43,149 @@ position.save
 #     "Timpani" => {}
 # }
 
-# positions_list = {
-#     Concertmaster
-#     Co-Concertmaster
-#     Assistant Concertmaster
-#     Section First Violin
+positions_list = [
+    "Concertmaster",
+    "Co-Concertmaster",
+    "Assistant Concertmaster",
+    "Section First Violin",
 
-#     Principal Second Violin
-#     Assistant Principal Second Violin
-#     Section Second Violin
+    "Principal Second Violin",
+    "Assistant Principal Second Violin",
+    "Section Second Violin",
 
-#     Principal Viola
-#     Associate Principal Viola
-#     Assistant Principal Viola
-#     Section Viola
+    "Principal Viola",
+    "Associate Principal Viola",
+    "Assistant Principal Viola",
+    "Section Viola",
 
-#     Principal Cello
-#     Associate Principal Cello
-#     Assistant Principal Cello
-#     Section Cello
+    "Principal Cello",
+    "Associate Principal Cello",
+    "Assistant Principal Cello",
+    "Section Cello",
 
-#     Principal Bass
-#     Associate Principal Bass
-#     Assistant Principal Bass
-#     Section Bass
+    "Principal Bass",
+    "Associate Principal Bass",
+    "Assistant Principal Bass",
+    "Section Bass",
     
-#     Principal Flute
-#     Associate Principal Flute
-#     Second Flute
-#     Piccolo
+    "Principal Flute",
+    "Associate Principal Flute",
+    "Second Flute",
+    "Piccolo",
     
-#     Principal Oboe
-#     Associate Principal Oboe
-#     Second Oboe
-#     English Horn
+    "Principal Oboe",
+    "Associate Principal Oboe",
+    "Second Oboe",
+    "English Horn",
 
-#     Principal Clarinet
-#     Associate Principal Clarinet
-#     Second Clarinet
-#     Bass Clarinet
+    "Principal Clarinet",
+    "Associate Principal Clarinet",
+    "Second Clarinet",
+    "Bass Clarinet",
 
-#     Principal Bassoon
-#     Associate Principal Bassoon
-#     Second Bassoon
-#     Contrabassoon
+    "Principal Bassoon",
+    "Associate Principal Bassoon",
+    "Second Bassoon",
+    "Contrabassoon",
     
-#     Principal Horn
-#     Associate Principal Horn
-#     Assistant Principal Horn
-#     Second Horn 
-#     Third Horn
-#     Fourth Horn
+    "Principal Horn",
+    "Associate Principal Horn",
+    "Assistant Principal Horn",
+    "Second Horn",
+    "Third Horn",
+    "Fourth Horn",
 
-#     Principal Trumpet
-#     Associate Principal Trumpet
-#     Assistant Principal Trumpet
-#     Second Trumpet
+    "Principal Trumpet",
+    "Associate Principal Trumpet",
+    "Assistant Principal Trumpet",
+    "Second Trumpet",
     
-#     Principal Trombone
-#     Associate Principal Trombone
-#     Assistant Principal Trombone
-#     Second Trombone
+    "Principal Trombone",
+    "Associate Principal Trombone",
+    "Assistant Principal Trombone",
+    "Second Trombone",
     
-#     Tuba
+    "Tuba",
 
-#     Principal Harp
-#     Principal Percussion
-#     Section Percussion
-#     Timpani
+    "Principal Harp",
+    "Principal Percussion",
+    "Section Percussion",
+    "Timpani",
 
-#     Principal Keyboard
-# }
+    "Principal Keyboard"
+]
+
+orchestras_list = [
+    "Alabama Symphony",
+    "Atlanta Symphony Orchestra",
+    "Baltimore Symphony Orchestra",
+    "Boston Symphony Orchestra",
+    "Buffalo Philharmonic Orchestra",
+    "Charlotte Symphony Orchestra",
+    "Chicago Symphony Orchestra",
+    "Cincinnati Symphony Orchestra",
+    "Cleveland Orchestra",
+    "Columbus Symphony Orchestra",
+    "Dallas Symphony Orchestra",
+    "Denver Symphony Orchestra",
+    "Detroit Symphony Orchestra",
+    "Florida Orchestra",
+    "Fort Worth Symphony Orchestra",
+    "Grand Rapids Symphony",
+    "Grant Park Symphony Orchestra",
+    "Hartford Symphony",
+    "Honolulu Symphony Orchestra",
+    "Houston Symphony",
+    "Indianapolis Symphony Orchestra",
+    "Jacksonville Symphony Orchestra",
+    "Kansas City Philharmonic",
+    "Kansas City Symphony",
+    "Kennedy Center Opera House Orchestra",
+    "Los Angeles Philharmonic",
+    "Louisiana Philharmonic",
+    "Louisville Orchestra",
+    "Lyric Opera of Chicago",
+    "Metropolitan Opera Orchestra",
+    "Milwaukee Symphony Orchestra",
+    "Minnesota Orchestra",
+    "Montreal Symphony Orchestra",
+    "Nashville Symphony Orchestra",
+    "National Symphony Orchestra",
+    "New Haven Symphony",
+    "New Jersey Symphony Orchestra",
+    "New York City Ballet Orchestra",
+    "New York City Opera Orchestra",
+    "New York Philharmonic",
+    "North Carolina Symphony",
+    "Oregon Symphony Orchestra",
+    "Philadelphia Orchestra",
+    "Phoenix Symphony Orchestra",
+    "Pittsburgh Symphony Orchestra",
+    "Rochester Philharmonic Orchestra",
+    "Saint Louis Symphony Orchestra",
+    "Saint Paul Chamber Orchestra",
+    "San Antonio Symphony",
+    "San Diego Symphony Orchestra",
+    "San Francisco Ballet Orchestra",
+    "San Francisco Opera Orchestra",
+    "San Francisco Symphony Orchestra",
+    "Seattle Symphony",
+    "Syracuse Symphony Orchestra",
+    "Toledo Symphony Orchestra",
+    "Toronto Symphony Orchestra",
+    "Utah Symphony Orchestra",
+    "Vancouver Symphony",
+    "Virginia Symphony"
+]
+
+def populate_orchestras_and_positions
+    positions_list.each do |title| 
+        Position.find_or_create_by(title: title)
+    end
+
+    orchestras_list.each do |name| 
+        o = Orchestra.find_or_create_by(name: name)
+        o.positions = Position.all
+    end
+end 
+

@@ -1,5 +1,10 @@
 class PositionsController < ApplicationController
+    include PositionsHelper
+    
     def index 
-        @positions = Position.all
+        @positions = positions_with_lists
     end
+
+
+     
 end

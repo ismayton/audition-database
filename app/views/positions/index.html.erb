@@ -1,3 +1,15 @@
 <% @positions.each do |t| %>
-    <h4><%= t.title %></h4>
+    <h2><%= t.title %></h2>
+    <% t.orchestras.each do |o| %>
+        <% if !o.lists.empty? %>
+
+            <h4><%= link_to "#{o.name}", orchestra_path(o) %></h4>
+            <ul>
+                <% o.lists.each do |l| %>
+                    <li><%= link_to "#{l.date}", list_path(l) %></li>
+                <% end %>
+            </ul>
+
+        <% end %>
+    <% end %>
 <% end %>

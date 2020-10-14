@@ -1,0 +1,7 @@
+<h2><%= full_position(@list) %></h2>
+
+<ul>
+    <% @list.excerpts.each do |e| %>
+        <li><%= e.title %> - <%= link_to "#{e.composer.name}", composer_path(e.composer) %></li>
+    <% end %>
+</ul>

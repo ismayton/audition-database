@@ -1,0 +1,8 @@
+<h2><%= @composer.name %></h2>
+
+<ul>
+    <% @composer.excerpts.each do |e| %>
+        <li><%= e.title %> - Lists: <%= e.lists.count %></li>
+    <% end %>
+</ul>
+

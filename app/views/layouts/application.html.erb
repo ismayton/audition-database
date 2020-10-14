@@ -9,6 +9,11 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
     <h1>Welcome to the Audition Database!</h1>
+    
+    <% if !current_page? root_path %>
+      <%= link_to "Home", '/' %>
+    <% end %>
+
   <body>
     <%= yield %><br>
     <% if !logged_in? %>
