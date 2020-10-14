@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   
   root to: 'sessions#index'
-  get '/login', to: 'sessions#login'
-  get '/signup', to: 'sessions#signup'
+
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get '/signup', to: 'users#new'
+  get '/logout', to: 'sessions#delete'
 
   resources :orchestras
   resources :positions

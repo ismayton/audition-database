@@ -11,16 +11,21 @@
     <h1>Welcome to the Audition Database!</h1>
     
     <% if !current_page? root_path %>
-      <%= link_to "Home", '/' %>
+      <%= link_to "Home", root_path %>
     <% end %>
 
   <body>
+    
     <%= yield %><br>
-    <% if !logged_in? %>
-      <%= link_to "Sign Up",  '/signup'%><br>
-      <%= link_to "Log In",  '/login'%><br>
-    <% else %>
-      <%= link_to "Log Out", '/logout' %>
-    <% end %>
+
+    <div>
+      <% if !logged_in? %>
+        <%= link_to "Sign Up",  '/signup'%><br>
+        <%= link_to "Log In",  '/login'%><br>
+      <% else %>
+        <%= link_to "Log Out", '/logout' %>
+      <% end %>
+    </div>
+
   </body>
 </html>

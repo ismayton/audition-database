@@ -1,4 +1,14 @@
 class UsersController < ApplicationController 
+    include UsersHelper 
+
+    def new
+        if logged_in?
+            redirect_to root_path
+            flash[:message] = "Already Logged In!"
+        else    
+            @user = User.new
+        end
+    end 
 
     def create 
         @user = User.new(user_params)
@@ -10,10 +20,9 @@ class UsersController < ApplicationController
         end
     end 
 
+    
     private 
 
-    def user_params
-        params.require(:user).permit(:username, :email, :password)
-    end 
+    
 
 end 
