@@ -1,0 +1,9 @@
+<h2>Create a New List</h2>
+<%= form_for @list do |o| %>
+    <%= o.label "Date" %>
+    <%= o.text_field :date %><br>
+
+    <%= o.collection_select :orchestra_id, Orchestra.all, :id, :name %><br>
+    <%= o.collection_select :position_id, Position.all, :id, :title %><br>
+    <%= o.submit %>
+<% end %>

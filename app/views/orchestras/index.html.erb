@@ -1,9 +1,20 @@
 <% @orchestras.each do |t| %>
-    <h2><%= link_to "#{t.name}", orchestra_path(t) %></h2>
-    <h4>Auditions:</h4>
-    <ul>
-        <% t.lists.each do |l| %>
-            <li><%= link_to "#{l.position.title}", list_path(l) %> - <%= l.date %></li> 
+    <div>
+        <h3><%= link_to "#{t.name}", orchestra_path(t) %></h3>
+
+        <% if admin? %>
+            <%= link_to "Edit Orchestra", edit_orchestra_path(t) %><br> 
         <% end %>
-    </ul>
+
+        <h4>Auditions:</h4>
+        <ul>
+            <% t.lists.each do |l| %>
+                <li><%= link_to "#{l.position.title}", list_path(l) %> - <%= l.date %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<% if admin? %>
+    <%= link_to "New Orchestra", new_orchestra_path %><br> 
 <% end %>

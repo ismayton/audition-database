@@ -1,15 +1,22 @@
 <% @positions.each do |t| %>
-    <h2><%= t.title %></h2>
+    <h2><%= link_to "#{t.title}", position_path(t) %></h2>
     <% t.orchestras.each do |o| %>
         <% if !o.lists.empty? %>
 
-            <h4><%= link_to "#{o.name}", orchestra_path(o) %></h4>
-            <ul>
+            <div>
+                <h4><%= link_to "#{o.name}", orchestra_path(o) %></h4>
+            
                 <% o.lists.each do |l| %>
                     <li><%= link_to "#{l.date}", list_path(l) %></li>
                 <% end %>
-            </ul>
+            </div>
 
         <% end %>
     <% end %>
 <% end %>
+
+<div>
+    <% if admin? %>
+        <%= link_to "New Position", new_position_path %><br> 
+    <% end %>
+</div>

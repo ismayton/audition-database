@@ -5,3 +5,8 @@
         <li><%= e.title %> - <%= link_to "#{e.composer.name}", composer_path(e.composer) %></li>
     <% end %>
 </ul>
+
+<% if admin? %>
+    <%= link_to "Edit List", edit_list_path %><br> 
+    <%= button_to "Delete List", list_path, method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>

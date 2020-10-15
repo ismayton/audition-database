@@ -2,3 +2,7 @@
     <h4><%= t.title %></h4>
     <p>Composed by: <%= t.composer.name %></p>
 <% end %>
+
+<% if admin? %>
+    <%= link_to "New Excerpt", new_excerpt_path %><br> 
+<% end %>

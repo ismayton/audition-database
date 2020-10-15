@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController 
-    include UsersHelper
-
+    
     def index
     end
 
@@ -23,10 +22,7 @@ class SessionsController < ApplicationController
             render :new 
             flash[:message] = "Invalid Login"
         end 
-
     end 
-
-    
 
     def delete
         session.clear

@@ -1,5 +1,5 @@
 <% @lists.each do |t| %>
-    <h4><%= full_position(t) %></h4>
+    <h4><%= link_to "#{full_position(t)}", list_path(t) %></h4>
 
     <ul>
     <% t.excerpts.each do |e| %>
@@ -7,4 +7,8 @@
     <% end %>
     </ul>
 
+<% end %>
+
+<% if admin? %>
+    <%= link_to "New List", new_list_path %><br> 
 <% end %>

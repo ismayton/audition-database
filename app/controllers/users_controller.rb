@@ -1,5 +1,4 @@
 class UsersController < ApplicationController 
-    include UsersHelper 
 
     def new
         if logged_in?
@@ -18,11 +17,5 @@ class UsersController < ApplicationController
         else
             render '/signup'
         end
-    end 
-
-    
-    private 
-
-    
-
+    end   
 end 

@@ -1,0 +1,8 @@
+<h2><%= @excerpt.title %> - <%= link_to "#{@excerpt.composer.name}", composer_path(@excerpt.composer) %></h2>
+
+<p>This excerpt is on <%= number_of_lists(@excerpt) %> lists.</p>
+
+<% if admin? %>
+    <%= link_to "Edit Excerpt", edit_excerpt_path %><br> 
+    <%= button_to "Delete Excerpt", excerpt_path, method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>

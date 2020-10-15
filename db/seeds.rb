@@ -11,17 +11,11 @@ def test_db
     excerpt.composer = Composer.find_or_create_by(name: "Ricard Strauss")
     excerpt.save
 
-    position = Position.find_or_create_by(title: "Second Horn")
-    orchestra = Orchestra.find_or_create_by(name: "Philadelphia Orchestra")
-    orchestra.positions << position
-
     list = List.find_or_create_by(date: "Today")
+    list.position = Position.find_by(title: "Second Horn")
+    list.orchestra = Orchestra.find_by(name: "Philadelphia Orchestra")
     list.excerpts << Excerpt.all 
     list.save
-
-    position.lists << list
-    orchestra.lists << list
-    position.save
 end
 
 # sections_list = {
@@ -43,7 +37,7 @@ end
 #     "Timpani" => {}
 # }
 
-positions_list = [
+POSITIONS = [
     "Concertmaster",
     "Co-Concertmaster",
     "Assistant Concertmaster",
@@ -115,7 +109,7 @@ positions_list = [
     "Principal Keyboard"
 ]
 
-orchestras_list = [
+ORCHESTRAS = [
     "Alabama Symphony",
     "Atlanta Symphony Orchestra",
     "Baltimore Symphony Orchestra",
@@ -179,13 +173,15 @@ orchestras_list = [
 ]
 
 def populate_orchestras_and_positions
-    positions_list.each do |title| 
+    POSITIONS.each do |title| 
         Position.find_or_create_by(title: title)
     end
 
-    orchestras_list.each do |name| 
+    ORCHESTRAS.each do |name| 
         o = Orchestra.find_or_create_by(name: name)
         o.positions = Position.all
     end
 end 
 
+populate_orchestras_and_positions
+test_db

@@ -1,0 +1,13 @@
+<h2><%= @position.title %></h2>
+
+<h4>Auditions:</h4>
+<ul>
+    <% @position.lists.each do |l| %>
+        <li><%= link_to "#{l.orchestra.name}", list_path(l) %> - <%= l.date %></li> 
+    <% end %>
+</ul>
+
+<% if admin? %>
+    <%= link_to "Edit Position", edit_position_path %><br> 
+    <%= button_to "Delete Position", position_path, method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>

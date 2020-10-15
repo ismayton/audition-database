@@ -1,4 +1,6 @@
 class ComposersController < ApplicationController
+    include ComposersHelper
+    
     def index 
         @composers = Composer.all
     end

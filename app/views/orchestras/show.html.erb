@@ -6,3 +6,8 @@
         <li><%= link_to "#{l.position.title}", list_path(l) %> - <%= l.date %></li> 
     <% end %>
 </ul>
+
+<% if admin? %>
+    <%= link_to "Edit Orchestra", edit_orchestra_path %><br> 
+    <%= button_to "Delete Orchestra", orchestra_path, method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>
