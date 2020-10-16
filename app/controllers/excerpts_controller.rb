@@ -41,8 +41,9 @@ class ExcerptsController < ApplicationController
 
     def update 
         @excerpt = Excerpt.find(params[:id])
-        if !params[:excerpt][:date].empty?
+        if !params[:excerpt][:title].empty?
             @excerpt.update(excerpt_params)
+            @excerpt.composer = Composer.find_or_create_by(name: params[:excerpt][:composer])
             redirect_to excerpt_path(@excerpt)
         else
             render :edit
