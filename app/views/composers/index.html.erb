@@ -1,3 +1,8 @@
 <% @composers.each do |t| %>
-    <h4>Audition Date: <%= t.name %></h4>
+    <h4>Composer: <%= t.name %></h4>
+    
+<% end %>
+
+<% if admin? %>
+    <%= link_to "New Composer", new_composer_path %><br> 
 <% end %>

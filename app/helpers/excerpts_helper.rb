@@ -3,6 +3,10 @@ module ExcerptsHelper
         excerpt.lists.count
     end
 
+    def full_title(excerpt)
+        excerpt.movement + " - " + excerpt.location + " - " + excerpt.description
+    end
+
     private 
 
     def excerpt_params

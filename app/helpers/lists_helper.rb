@@ -4,6 +4,10 @@ module ListsHelper
         list.position.title + " - " + list.orchestra.name
     end 
 
+    def readable_date
+        #date decyphering here
+    end 
+
     private 
     
     def list_params

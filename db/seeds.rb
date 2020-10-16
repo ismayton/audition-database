@@ -6,36 +6,126 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-def test_db
-    excerpt = Excerpt.find_or_create_by(title: "Ein Heldenleben")
-    excerpt.composer = Composer.find_or_create_by(name: "Ricard Strauss")
-    excerpt.save
+def test_piece_excerpt_composer
+    piece = Piece.find_or_create_by(title: "Ein Heldenleben")
+    piece.composer = Composer.find_or_create_by(name: "Ricard Strauss")
 
-    list = List.find_or_create_by(date: "Today")
+    excerpt_locations = [
+        "Beginning – 3 m. before Reh 2",
+        "1 m. before Reh 78 – Reh 82",
+        "Pickup to Reh 107 – end"
+    ]
+    excerpt_locations.each do |location|
+        excerpt = Excerpt.find_or_create_by(location: location)
+        excerpt.piece = piece
+        excerpt.save
+    end
+end
+
+def test_list
+    list = List.find_or_create_by(date: Date.parse('June 16, 2019'))
     list.position = Position.find_by(title: "Second Horn")
     list.orchestra = Orchestra.find_by(name: "Philadelphia Orchestra")
     list.excerpts << Excerpt.all 
     list.save
 end
 
-# sections_list = {
-#     "Violin" => {},
-#     "Viola" => {},
-#     "Cello" => {},
-#     "Bass" => {},
-#     "Oboe" => {},
-#     "Flute" => {},
-#     "Clarinet" => {},
-#     "Bassoon" => {},
-#     "Trumpet" => {},
-#     "Horn" => {},
-#     "Trombone" => {},
-#     "Tuba" => {},
-#     "Harp" => {},
-#     "Percussion" => {},
-#     "Keyboard" => {},
-#     "Timpani" => {}
-# }
+INSTRUMENTS = {
+    "Violin" => [
+        "Concertmaster", 
+        "Co-Concertmaster", 
+        "Assistant Concertmaster",
+        "Section First Violin",
+        "Principal Second Violin",
+        "Assistant Principal Second Violin",
+        "Section Second Violin"
+    ],
+
+    "Viola" => [
+        "Principal Viola",
+        "Associate Principal Viola",
+        "Assistant Principal Viola",
+        "Section Viola"
+    ],
+
+    "Cello" => [
+        "Principal Cello",
+        "Associate Principal Cello",
+        "Assistant Principal Cello",
+        "Section Cello"
+    ],
+
+    "Bass" => [
+        "Principal Bass",
+        "Associate Principal Bass",
+        "Assistant Principal Bass",
+        "Section Bass"
+    ],
+
+    "Oboe" => [
+        "Principal Oboe",
+        "Associate Principal Oboe",
+        "Second Oboe",
+        "English Horn"
+    ],
+
+    "Flute" => [
+        "Principal Flute",
+        "Associate Principal Flute",
+        "Second Flute",
+        "Piccolo"
+    ],
+
+    "Clarinet" => [
+        "Principal Clarinet",
+        "Associate Principal Clarinet",
+        "Second Clarinet",
+        "Bass Clarinet"
+    ],
+
+    "Bassoon" => [
+        "Principal Bassoon",
+        "Associate Principal Bassoon",
+        "Second Bassoon",
+        "Contrabassoon"
+    ],
+
+    "Trumpet" => [
+        "Principal Trumpet",
+        "Associate Principal Trumpet",
+        "Assistant Principal Trumpet",
+        "Second Trumpet"
+    ],
+
+    "Horn" => [
+        "Principal Horn",
+        "Associate Principal Horn",
+        "Assistant Principal Horn",
+        "Second Horn",
+        "Third Horn",
+        "Fourth Horn"
+    ],
+
+    "Trombone" => [
+        "Principal Trombone",
+        "Associate Principal Trombone",
+        "Assistant Principal Trombone",
+        "Second Trombone",
+        "Bass Trombone"
+    ],
+
+    "Tuba" => [ "Principal Tuba" ],
+
+    "Harp" => [ "Principal Harp" ],
+
+    "Percussion" => [
+        "Principal Percussion",
+        "Section Percussion",
+        "Timpani"
+    ],
+
+    "Keyboard" => [ "Principal Keyboard" ]
+}
 
 POSITIONS = [
     "Concertmaster",
@@ -98,6 +188,7 @@ POSITIONS = [
     "Associate Principal Trombone",
     "Assistant Principal Trombone",
     "Second Trombone",
+    "Bass Trombone",
     
     "Tuba",
 
@@ -172,16 +263,30 @@ ORCHESTRAS = [
     "Virginia Symphony"
 ]
 
-def populate_orchestras_and_positions
-    POSITIONS.each do |title| 
-        Position.find_or_create_by(title: title)
-    end
+def populate_instruments_and_positions
 
+    INSTRUMENTS.each do |instrument_name, position_names|
+        instrument = Instrument.find_or_create_by(name: instrument_name)
+        position_names.each do |title| 
+            position = Position.find_or_create_by(title: title)
+            position.instrument = instrument
+            position.save
+        end
+    end
+end
+
+def populate_orchestras
     ORCHESTRAS.each do |name| 
         o = Orchestra.find_or_create_by(name: name)
         o.positions = Position.all
     end
 end 
 
-populate_orchestras_and_positions
-test_db
+def full_test
+    populate_instruments_and_positions
+    populate_orchestras
+    test_piece_excerpt_composer
+    test_list
+end
+
+full_test

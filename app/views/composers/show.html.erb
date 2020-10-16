@@ -2,7 +2,11 @@
 
 <ul>
     <% @composer.excerpts.each do |e| %>
-        <li><%= e.title %> - Lists: <%= e.lists.count %></li>
+        <li><%= full_title(e) %> - Lists: <%= e.lists.count %></li>
     <% end %>
 </ul>
 
+<% if admin? %>
+    <%= link_to "Edit Composer", edit_composer_path %><br> 
+    <%= button_to "Delete Composer", composer_path, method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>

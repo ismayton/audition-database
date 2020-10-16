@@ -3,7 +3,7 @@
 
     <ul>
     <% t.excerpts.each do |e| %>
-        <li><%= e.title %> - <%= e.composer.name %></li>
+        <li><%= full_title(e) %> - <%= e.composer.name %></li>
     <% end %>
     </ul>
 

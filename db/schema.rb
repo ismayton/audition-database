@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_14_210455) do
+ActiveRecord::Schema.define(version: 2020_10_16_181612) do
 
   create_table "composers", force: :cascade do |t|
     t.string "name"
@@ -19,11 +19,13 @@ ActiveRecord::Schema.define(version: 2020_10_14_210455) do
   end
 
   create_table "excerpts", force: :cascade do |t|
-    t.string "title"
-    t.integer "composer_id"
+    t.string "movement", default: ""
+    t.string "location", default: ""
+    t.string "description", default: ""
+    t.integer "piece_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["composer_id"], name: "index_excerpts_on_composer_id"
+    t.index ["piece_id"], name: "index_excerpts_on_piece_id"
   end
 
   create_table "excerpts_lists", id: false, force: :cascade do |t|
@@ -31,8 +33,14 @@ ActiveRecord::Schema.define(version: 2020_10_14_210455) do
     t.integer "excerpt_id", null: false
   end
 
+  create_table "instruments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "lists", force: :cascade do |t|
-    t.string "date"
+    t.date "date"
     t.integer "position_id"
     t.integer "orchestra_id"
     t.datetime "created_at", precision: 6, null: false
@@ -52,22 +60,36 @@ ActiveRecord::Schema.define(version: 2020_10_14_210455) do
     t.integer "position_id", null: false
   end
 
-  create_table "positions", force: :cascade do |t|
+  create_table "pieces", force: :cascade do |t|
     t.string "title"
+    t.integer "year"
+    t.string "version"
+    t.integer "composer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["composer_id"], name: "index_pieces_on_composer_id"
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string "title"
+    t.integer "instrument_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["instrument_id"], name: "index_positions_on_instrument_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
     t.string "password_digest"
+    t.boolean "admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "admin", default: false
   end
 
-  add_foreign_key "excerpts", "composers"
+  add_foreign_key "excerpts", "pieces"
   add_foreign_key "lists", "orchestras"
   add_foreign_key "lists", "positions"
+  add_foreign_key "pieces", "composers"
+  add_foreign_key "positions", "instruments"
 end

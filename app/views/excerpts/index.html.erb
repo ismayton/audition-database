@@ -1,5 +1,5 @@
 <% @excerpts.each do |t| %>
-    <h4><%= link_to "#{t.title}", excerpt_path(t) %></h4>
+    <h4><%= link_to "#{full_title(t)}", excerpt_path(t) %></h4>
     <p>Composed by: <%= t.composer.name %></p>
 <% end %>
 
