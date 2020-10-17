@@ -4,8 +4,8 @@ module ListsHelper
         list.position.title + " - " + list.orchestra.name
     end 
 
-    def readable_date
-        #date decyphering here
+    def display_date(list)
+        list.date.strftime(' %B %d, %Y')
     end 
 
     private 

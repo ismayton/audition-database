@@ -3,7 +3,7 @@
 <h4>Auditions:</h4>
 <ul>
     <% @orchestra.lists.each do |l| %>
-        <li><%= link_to "#{l.position.title}", list_path(l) %> - <%= l.date %></li> 
+        <li><%= link_to "#{l.position.title}", list_path(l) %> - <%= display_date(l) %></li> 
     <% end %>
 </ul>
 

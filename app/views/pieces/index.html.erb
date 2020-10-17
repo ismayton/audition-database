@@ -1,0 +1,14 @@
+<% @pieces.each do |t| %>
+
+    <h4><%= link_to "#{t.title}", piece_path(t) %></h4>
+    <p>Composer: <%= t.composer.name %></p>
+
+    <% t.excerpts.each do |e| %>
+        <%= link_to "#{full_title(e)}", excerpt_path(e) %><br>
+    <% end %>
+
+<% end %>
+
+<% if admin? %>
+    <%= link_to "New Piece", new_piece_path %><br> 
+<% end %>

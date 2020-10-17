@@ -7,7 +7,7 @@
                 <h4><%= link_to "#{o.name}", orchestra_path(o) %></h4>
             
                 <% o.lists.each do |l| %>
-                    <li><%= link_to "#{l.date}", list_path(l) %></li>
+                    <li><%= link_to "#{ display_date(l)}", list_path(l) %></li>
                 <% end %>
             </div>
 

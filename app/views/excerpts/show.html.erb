@@ -1,6 +1,6 @@
-<h2><%= @excerpt.title %> - <%= link_to "#{@excerpt.composer.name}", composer_path(@excerpt.composer) %></h2>
-
-<p>This excerpt is on <%= number_of_lists(@excerpt) %> lists.</p>
+<h2><%= full_title(@excerpt) %></h2>
+<h4>Composer: <%= link_to "#{@excerpt.composer.name}", composer_path(@excerpt.composer) %></h4>
+<p>This excerpt is on <%= pluralize(number_of_lists(@excerpt), 'list') %>.</p>
 
 <% if admin? %>
     <%= link_to "Edit Excerpt", edit_excerpt_path %><br> 

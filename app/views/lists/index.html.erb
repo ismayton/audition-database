@@ -1,6 +1,7 @@
 <% @lists.each do |t| %>
-    <h4><%= link_to "#{full_position(t)}", list_path(t) %></h4>
-
+    <h2><%= link_to "#{full_position(t)}", list_path(t) %></h2>
+    <h4>Date: <%= display_date(t) %></h4>
+    <h4>Excerpts:</h4>
     <ul>
     <% t.excerpts.each do |e| %>
         <li><%= full_title(e) %> - <%= e.composer.name %></li>
