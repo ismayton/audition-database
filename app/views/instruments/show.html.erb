@@ -1,0 +1,16 @@
+<h2>All <%= @instrument.name %> Lists</h2>
+
+<% @instrument.positions.each do |position| %>
+    <% if !position.lists.empty? %>
+        <h4><%= position.title %></h4>
+        <% position.lists.each do |list| %>
+            <li><%= link_to "#{list.orchestra.name}", list_path(list) %> - <%= display_date(list) %></li> 
+        <% end %> 
+    <% end %>
+<% end %>
+
+
+<% if admin? %>
+    <%= link_to "Edit Instrument", edit_instrument_path %><br> 
+    <%= button_to "Delete Instrument", instrument_path, method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>

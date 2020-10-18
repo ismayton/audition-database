@@ -124,7 +124,9 @@ INSTRUMENTS = {
         "Timpani"
     ],
 
-    "Keyboard" => [ "Principal Keyboard" ]
+    "Keyboard" => [ "Principal Keyboard" ],
+
+    "Other" => []
 }
 
 POSITIONS = [
@@ -261,6 +263,28 @@ ORCHESTRAS = [
     "Utah Symphony Orchestra",
     "Vancouver Symphony",
     "Virginia Symphony"
+]
+
+COMPOSERS = {
+    "L.V. Beethoven" => [],
+    "Johannes Brahms" => [],
+    "Hector Berlioz" => [],
+    "Antonin Dvorak" => [],
+    "Joseph Haydn" => [],
+    "John Harbison" => [],
+    "Gustav Mahler" => [],
+    "Felix Mendelssohn" => [],
+    "W.A. Mozart" => [],
+    "Sergei Prokofiev" => [],
+    "Maurice Ravel" => [],
+    "Camille Saint-Saens" => [],
+    "Robert Schumann" => [],
+    "Ricard Strauss" => [],
+    "Igor Stravinsky" => []
+}
+
+EXCERPTS = [
+
 ]
 
 def populate_instruments_and_positions
