@@ -1,13 +1,27 @@
 <% if logged_in? %>
-    <%= link_to "Orchestras", orchestras_path %><br>
-    <%= link_to "Instruments", instruments_path %><br>
-    <%= link_to "Positions", positions_path %><br>
-    <%= link_to "Lists", lists_path %><br>
-    
-    <div id="library">
-        <%= link_to "Pieces", pieces_path %><br>
-        <%= link_to "Excerpts", excerpts_path %><br>
-        <%= link_to "Composers", composers_path %><br>
+
+<div id="bd">
+    <div id="yui-main">
+      <div class="yui-b">
+        <div class="yui-gf">
+          <div class="yui-u first">
+            <div class="content">
+                <h2>Lists By Instrument</h2>
+                <% Instrument.all.each do |instrument| %>
+                    <%= link_to "#{instrument.name}", instrument_lists_path(instrument) %><br>
+                <% end %>
+            </div>
+          </div>
+          <div class="yui-u">
+            <div class="content"><h4><%= link_to "All Lists", lists_path %></h4></div>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="yui-b">
+      <div id="secondary"><h4><%= link_to "All Lists", lists_path %></div>
+    </div>
+  </div>
+</div>
     
 <% end %>

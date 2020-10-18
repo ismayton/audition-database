@@ -1,6 +1,9 @@
 <% if @user %>
     <h1><%= @user.username %>'s Lists</h1>
-<% end %>
+<% elsif @instrument %>
+    <h1><%= @instrument.name %> Lists</h1>
+<% end %> 
+
 <% @lists.each do |t| %>
     <h2><%= link_to "#{full_position(t)}", list_path(t) %></h2>
     <h4>Date: <%= display_date(t) %></h4>

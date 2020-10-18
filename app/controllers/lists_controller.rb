@@ -2,11 +2,15 @@ class ListsController < ApplicationController
     include ListsHelper
     
     def index
-        @lists = List.all 
         if params[:user_id]
             @user = User.find(params[:user_id])
+            @lists = @user.lists
+        elsif params[:instrument_id]
+            @instrument = Instrument.find(params[:instrument_id])
+            @lists = @instrument.lists 
+        else
+            @lists = List.all  
         end
-
     end
 
     def show 

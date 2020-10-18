@@ -8,10 +8,14 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#delete'
 
   resources :orchestras, :positions, :excerpts, :composers, :pieces, :instruments
+  
+  resources :instruments do 
+    resources :lists, only: [:index]
+  end 
+  
   resources :users, only: [:new, :create] do
     resources :lists, only: [:index]
   end 
-
 
   resources :lists do 
     resources :excerpts, only: [:index, :new]
