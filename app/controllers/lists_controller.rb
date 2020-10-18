@@ -3,6 +3,10 @@ class ListsController < ApplicationController
     
     def index
         @lists = List.all 
+        if params[:user_id]
+            @user = User.find(params[:user_id])
+        end
+
     end
 
     def show 
@@ -12,6 +16,7 @@ class ListsController < ApplicationController
     def new 
         if admin?
             @list = List.new
+            @list.excerpts.build
         else
             redirect_to lists_path
             flash[:message] = "Admin Access Only"
@@ -19,8 +24,13 @@ class ListsController < ApplicationController
     end 
 
     def create 
-        @list = List.create(list_params)
-        redirect_to list_path(@list)
+        @list = List.new(list_params)
+        if @list.save
+            redirect_to list_path(@list)
+        else
+            render 'new'
+            flash[:message] = "Invalid List Params"
+        end
     end 
 
     def edit

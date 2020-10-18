@@ -1,3 +1,6 @@
+<% if @user %>
+    <h1><%= @user.username %>'s Lists</h1>
+<% end %>
 <% @lists.each do |t| %>
     <h2><%= link_to "#{full_position(t)}", list_path(t) %></h2>
     <h4>Date: <%= display_date(t) %></h4>
@@ -7,7 +10,9 @@
         <li><%= full_title(e) %> - <%= e.composer.name %></li>
     <% end %>
     </ul>
-
+    <% if logged_in? %>
+        <%= link_to "Add to My Lists", user_lists_path(User.find(session[:user_id])) %><br>
+    <% end %>
 <% end %>
 
 <% if admin? %>

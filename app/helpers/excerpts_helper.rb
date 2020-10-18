@@ -4,12 +4,12 @@ module ExcerptsHelper
     end
 
     def full_title(excerpt)
-        excerpt.movement + " - " + excerpt.location + " - " + excerpt.description
+        excerpt.piece.title + " - " + excerpt.description 
     end
 
     private 
 
     def excerpt_params
-        params.require(:excerpt).permit(:title, :composer_id, list_ids:[])
+        params.require(:excerpt).permit(:description, :piece_id, :list_ids)
     end
 end

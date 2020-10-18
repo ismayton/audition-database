@@ -1,16 +1,10 @@
 <h2>Edit Excerpt</h2>
-<%= form_for @excerpt do |o| %>
-    <%= o.label "Title" %>
-    <%= o.text_field :title %><br>
+<%= form_for @excerpt do |e| %>
+    <%= e.label "Piece" %>
+    <%= e.collection_select :piece_id, Piece.all, :id, :title_and_composer, include_blank: true %><br>
 
-    <%= o.label "Composer" %>
-    <%= o.collection_select :composer_id, Composer.all, :id, :name, include_blank: true %><br>
-    
-    <%= o.label "New Composer" %>
-    <%= o.text_field :composer, value: nil %><br>
+    <%= e.label "Description" %>
+    <%= e.text_field :description %><br>
 
-    <%= o.label "Add to Existing List(s)" %><br>
-    <%= o.collection_check_boxes :list_ids, List.all, :id, :date %><br>
-
-    <%= o.submit %>
+    <%= e.submit %>
 <% end %>

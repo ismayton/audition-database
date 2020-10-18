@@ -11,6 +11,8 @@ module ListsHelper
     private 
     
     def list_params
-        params.require(:list).permit(:date, :orchestra_id, :position_id)
+        params.require(:list).permit(:date, :orchestra_id, :position_id, 
+            excerpts_attributes: [:composer_id, :piece_id, :description]
+        )
     end
 end

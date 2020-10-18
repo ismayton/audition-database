@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 def test_piece_excerpt_composer
     piece = Piece.find_or_create_by(title: "Ein Heldenleben")
     piece.composer = Composer.find_or_create_by(name: "Ricard Strauss")
@@ -265,28 +257,6 @@ ORCHESTRAS = [
     "Virginia Symphony"
 ]
 
-COMPOSERS = {
-    "L.V. Beethoven" => [],
-    "Johannes Brahms" => [],
-    "Hector Berlioz" => [],
-    "Antonin Dvorak" => [],
-    "Joseph Haydn" => [],
-    "John Harbison" => [],
-    "Gustav Mahler" => [],
-    "Felix Mendelssohn" => [],
-    "W.A. Mozart" => [],
-    "Sergei Prokofiev" => [],
-    "Maurice Ravel" => [],
-    "Camille Saint-Saens" => [],
-    "Robert Schumann" => [],
-    "Ricard Strauss" => [],
-    "Igor Stravinsky" => []
-}
-
-EXCERPTS = [
-
-]
-
 def populate_instruments_and_positions
 
     INSTRUMENTS.each do |instrument_name, position_names|
@@ -313,4 +283,40 @@ def full_test
     test_list
 end
 
-full_test
+COMPOSERS = {
+    "L.V. Beethoven" => ["Symphony No. 7"], 
+    "Johannes Brahms"=> ["Piano Concerto No. 1", "Piano Concerto No. 2", "Symphony No. 4"],
+    "Hector Berlioz"=> [],
+    "Antonin Dvorak"=> ["Cello Concerto", "Symphony No. 9"],
+    "Joseph Haydn"=> [],
+    "John Harbison"=> [],
+    "Gustav Mahler"=> [],
+    "Felix Mendelssohn"=> [],
+    "W.A. Mozart"=> [],
+    "Sergei Prokofiev"=> [],
+    "Maurice Ravel"=> [],
+    "Camille Saint-Saens"=> [],
+    "Robert Schumann"=> [],
+    "Ricard Strauss"=> [],
+    "Igor Stravinsky"=> []
+}
+
+
+
+
+def populate_composers_and_pieces 
+    COMPOSERS.each  do |composer_name, pieces_array| 
+        composer = Composer.find_or_create_by(name: composer_name)
+        pieces_array.each do |piece_title|
+            composer.pieces.find_or_create_by(title: piece_title) 
+        end
+    end
+end
+
+def full_populate
+    populate_instruments_and_positions
+    populate_orchestras
+    populate_composers_and_pieces
+end 
+
+full_populate

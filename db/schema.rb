@@ -19,9 +19,7 @@ ActiveRecord::Schema.define(version: 2020_10_16_181612) do
   end
 
   create_table "excerpts", force: :cascade do |t|
-    t.string "movement", default: ""
-    t.string "location", default: ""
-    t.string "description", default: ""
+    t.string "description"
     t.integer "piece_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

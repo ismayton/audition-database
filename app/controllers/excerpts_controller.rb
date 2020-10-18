@@ -2,7 +2,11 @@ class ExcerptsController < ApplicationController
     include ExcerptsHelper
 
     def index
-        @excerpts = Excerpt.all
+        if params[:list_id]
+            @excerpts = List.find(params[:list_id]).excerpts
+        else
+            @excerpts = Excerpt.all
+        end
     end 
 
     def show 
@@ -11,7 +15,7 @@ class ExcerptsController < ApplicationController
 
     def new 
         if admin?
-            @excerpt = Excerpt.new
+            @excerpt = Excerpt.new(list_ids: params[:list_id])
             @lists = List.all
         else
             redirect_to excerpts_path
@@ -21,13 +25,12 @@ class ExcerptsController < ApplicationController
 
     def create 
         @excerpt = Excerpt.new(excerpt_params)
-
-        if !params[:excerpt][:composer].empty?
-            @excerpt.composer = Composer.find_or_create_by(name: params[:excerpt][:composer]) 
-        end 
-
         @excerpt.save
-        redirect_to excerpt_path(@excerpt)
+        if params[:excerpt][:list_ids]
+            redirect_to list_excerpts_path(List.find(params[:excerpt][:list_ids]))
+        else
+            redirect_to excerpt_path(@excerpt)
+        end
     end 
 
     def edit
@@ -41,13 +44,12 @@ class ExcerptsController < ApplicationController
 
     def update 
         @excerpt = Excerpt.find(params[:id])
-        if !params[:excerpt][:title].empty?
+        if !params[:excerpt][:description].empty?
             @excerpt.update(excerpt_params)
-            @excerpt.composer = Composer.find_or_create_by(name: params[:excerpt][:composer])
             redirect_to excerpt_path(@excerpt)
         else
             render :edit
-            flash[:message] = "Date is Required" 
+            flash[:message] = "Description is Required" 
         end 
     end 
 

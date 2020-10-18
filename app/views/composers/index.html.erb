@@ -1,6 +1,6 @@
 <% @composers.each do |t| %>
     <h4>Composer: <%= t.name %></h4>
-    
+    <p>Pieces: <%= t.pieces.count %></p>
 <% end %>
 
 <% if admin? %>

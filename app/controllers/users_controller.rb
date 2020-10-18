@@ -17,5 +17,6 @@ class UsersController < ApplicationController
         else
             render '/signup'
         end
-    end   
+    end  
+ 
 end 

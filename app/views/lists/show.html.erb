@@ -7,6 +7,9 @@
         <li><%= full_title(e) %> - <%= link_to "#{e.composer.name}", composer_path(e.composer) %></li>
     <% end %>
 </ul>
+<%= link_to "Show All Excerpts", list_excerpts_path(@list) %><br>
+<%= link_to "Add a New Excerpt", new_list_excerpt_path(@list) %><br>
+
 
 <% if admin? %>
     <%= link_to "Edit List", edit_list_path %><br> 
