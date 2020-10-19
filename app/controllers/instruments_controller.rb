@@ -13,8 +13,8 @@ class InstrumentsController < ApplicationController
         if admin?
             @instrument = Instrument.new
         else
-            redirect_to instruments_path
             flash[:message] = "Admin Access Only"
+            redirect_to instruments_path
         end
     end 
 
@@ -28,8 +28,8 @@ class InstrumentsController < ApplicationController
         if admin?
             @instrument = Instrument.find(params[:id])
         else
-            redirect_to instrument_path(params[:id])
             flash[:message] = "Admin Access Only"
+            redirect_to instrument_path(params[:id])
         end 
     end 
 
@@ -39,8 +39,8 @@ class InstrumentsController < ApplicationController
             @instrument.update(instrument_params)
             redirect_to instrument_path(@instrument)
         else
+            flash[:message] = "Name is Required"
             render :edit
-            flash[:message] = "Name is Required" 
         end 
     end 
 
@@ -57,8 +57,8 @@ class InstrumentsController < ApplicationController
             @instrument.destroy
             redirect_to instruments_path
         else
-            redirect_to instrument_path(params[:id])
             flash[:message] = "Admin Access Only"
+            redirect_to instrument_path(params[:id])
         end
     end
 end 

@@ -13,8 +13,8 @@ class PiecesController < ApplicationController
         if admin?
             @piece = Piece.new
         else
-            redirect_to pieces_path
             flash[:message] = "Admin Access Only"
+            redirect_to pieces_path
         end
     end 
 
@@ -25,16 +25,21 @@ class PiecesController < ApplicationController
             @piece.composer = Composer.find_or_create_by(name: params[:piece][:composer]) 
         end 
 
-        @piece.save
-        redirect_to piece_path(@piece)
+        if @piece.save
+            redirect_to piece_path(@piece)
+        else
+            
+            flash[:message] = "Invalid Piece Params"
+            render 'new'
+        end
     end 
 
     def edit
         if admin?
             @piece = Piece.find(params[:id])
         else
-            redirect_to piece_path(params[:id])
             flash[:message] = "Admin Access Only"
+            redirect_to piece_path(params[:id])
         end 
     end 
 
@@ -48,8 +53,8 @@ class PiecesController < ApplicationController
             end 
             redirect_to piece_path(@piece)
         else
+            flash[:message] = "Title is Required"
             render :edit
-            flash[:message] = "Title is Required" 
         end 
     end 
 
@@ -63,8 +68,8 @@ class PiecesController < ApplicationController
 
             redirect_to pieces_path
         else
-            redirect_to piece_path(params[:id])
             flash[:message] = "Admin Access Only"
+            redirect_to piece_path(params[:id])
         end
     end
     

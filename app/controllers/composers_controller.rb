@@ -13,8 +13,8 @@ class ComposersController < ApplicationController
         if admin?
             @composer = Composer.new
         else
-            redirect_to composers_path
             flash[:message] = "Admin Access Only"
+            redirect_to composers_path
         end
     end 
 
@@ -27,8 +27,8 @@ class ComposersController < ApplicationController
         if admin?
             @composer = Composer.find(params[:id])
         else
-            redirect_to composer_path(params[:id])
             flash[:message] = "Admin Access Only"
+            redirect_to composer_path(params[:id])
         end 
     end 
 
@@ -38,8 +38,9 @@ class ComposersController < ApplicationController
             @composer.update(composer_params)
             redirect_to composer_path(@composer)
         else
+            flash[:message] = "Name is Required" 
             render :edit
-            flash[:message] = "Date is Required" 
+            
         end 
     end 
 
@@ -48,8 +49,8 @@ class ComposersController < ApplicationController
             Composer.find(params[:id]).destroy
             redirect_to composers_path
         else
-            redirect_to composer_path(params[:id])
             flash[:message] = "Admin Access Only"
+            redirect_to composer_path(params[:id])
         end
     end
 end

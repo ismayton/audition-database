@@ -1,7 +1,8 @@
 <h2><%= full_position(@list) %></h2>
 
-<h4>Date: <%= display_date(@list) %></h4>
+
 <div class="content shadow">
+    <h4>Date: <%= display_date(@list) %></h4>
     <h4>Excerpts:</h4>
     <ul>
         <% @list.excerpts.each do |e| %>

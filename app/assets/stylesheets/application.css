@@ -1,6 +1,6 @@
 #main {
     position: relative;
-    min-height: 750px;
+    min-height: 100%;
 }
 
 body {
@@ -13,9 +13,10 @@ h1, h2, h3, h4 {
 }
 
 #header{
-	height:100px;
+	height:auto;
 	margin:0;
-    padding:0;
+    padding:25px;
+    text-align: left;
 	}
 	
 #header h1{
@@ -77,6 +78,7 @@ h1, h2, h3, h4 {
 
 li {
     list-style-position: inside;
+    text-align: left;
 }
 
 input {
@@ -84,3 +86,35 @@ input {
     border-radius: 8px;
 }
 
+/* The navbar container */
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    margin-bottom: 25px;
+  }
+  
+  /* Navbar links */
+  .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 25px 16px;
+    text-decoration: none;
+    min-width: 50px;
+  }
+  
+  /* Links - change color on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .login {
+      float: right;
+  }
+
+  .error {
+      background-color: rgba(255, 0, 0, 0.712);
+      
+  }

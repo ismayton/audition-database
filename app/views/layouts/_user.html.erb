@@ -1,0 +1,20 @@
+<% if !current_page? root_path %>
+  <%= link_to "Home", root_path %>
+<% end %>
+
+<% if logged_in? %>
+  <% if !current_page? user_lists_path(user) %>
+    <%= link_to "My Lists", user_lists_path(user) %>
+  <% end %>
+<% end %>
+
+<div class="login">
+<% if !login_or_signup_path %>
+  <% if !logged_in? %>
+    <%= link_to "Sign Up",  '/signup'%>
+    <%= link_to "Log In",  '/login'%>
+  <% else %>
+    <%= link_to "Log Out", '/logout' %>
+  <% end %>
+<% end %>
+</div>

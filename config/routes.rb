@@ -7,14 +7,14 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   get '/logout', to: 'sessions#delete'
   get '/library', to: 'sessions#library'
-  
+
   resources :orchestras, :positions, :excerpts, :composers, :pieces, :instruments
   
   resources :instruments do 
     resources :lists, only: [:index]
   end 
   
-  resources :users, only: [:new, :create, :edit] do
+  resources :users, only: [:new, :create] do
     resources :lists, only: [:index]
   end 
 

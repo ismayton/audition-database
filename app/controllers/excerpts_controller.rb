@@ -18,8 +18,8 @@ class ExcerptsController < ApplicationController
             @excerpt = Excerpt.new(list_ids: params[:list_id])
             @lists = List.all
         else
-            redirect_to excerpts_path
             flash[:message] = "Admin Access Only"
+            redirect_to excerpts_path
         end
     end 
 
@@ -37,8 +37,8 @@ class ExcerptsController < ApplicationController
         if admin?
             @excerpt = Excerpt.find(params[:id])
         else
-            redirect_to excerpt_path(params[:id])
             flash[:message] = "Admin Access Only"
+            redirect_to excerpt_path(params[:id])
         end 
     end 
 
@@ -48,8 +48,8 @@ class ExcerptsController < ApplicationController
             @excerpt.update(excerpt_params)
             redirect_to excerpt_path(@excerpt)
         else
+            flash[:message] = "Description is Required"
             render :edit
-            flash[:message] = "Description is Required" 
         end 
     end 
 
@@ -60,8 +60,8 @@ class ExcerptsController < ApplicationController
 
             redirect_to excerpts_path
         else
-            redirect_to excerpt_path(params[:id])
             flash[:message] = "Admin Access Only"
+            redirect_to excerpt_path(params[:id])
         end
     end
 end

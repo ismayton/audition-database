@@ -1,0 +1,7 @@
+<h3>Lists By Instrument</h3>
+
+<% Instrument.all.each do |instrument| %>
+    <%= link_to "#{instrument.name}", instrument_lists_path(instrument) %><br>
+<% end %>
+
+<h4><%= link_to "All Lists", lists_path %></h4>

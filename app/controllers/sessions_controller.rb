@@ -5,8 +5,8 @@ class SessionsController < ApplicationController
 
     def new
         if logged_in?
-            redirect_to root_path 
             flash[:message] = "Already Logged In!"
+            redirect_to root_path 
         else 
             @user = User.new
         end
@@ -22,8 +22,8 @@ class SessionsController < ApplicationController
             session[:user_id] = @user.id 
             redirect_to root_path
         else
-            render :new 
             flash[:message] = "Invalid Login"
+            render :new 
         end 
     end 
 

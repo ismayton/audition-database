@@ -13,8 +13,8 @@ class OrchestrasController < ApplicationController
         if admin?
             @orchestra = Orchestra.new
         else
-            redirect_to orchestras_path
             flash[:message] = "Admin Access Only"
+            redirect_to orchestras_path
         end
     end 
 
@@ -28,8 +28,8 @@ class OrchestrasController < ApplicationController
         if admin?
             @orchestra = Orchestra.find(params[:id])
         else
-            redirect_to orchestra_path(params[:id])
             flash[:message] = "Admin Access Only"
+            redirect_to orchestra_path(params[:id])
         end 
     end 
 
@@ -39,8 +39,8 @@ class OrchestrasController < ApplicationController
             @orchestra.update(orchestra_params)
             redirect_to orchestra_path(@orchestra)
         else
+            flash[:message] = "Name is Required"
             render :edit
-            flash[:message] = "Name is Required" 
         end 
     end 
 
@@ -54,8 +54,8 @@ class OrchestrasController < ApplicationController
 
             redirect_to orchestras_path
         else
-            redirect_to orchestra_path(params[:id])
             flash[:message] = "Admin Access Only"
+            redirect_to orchestra_path(params[:id])
         end
     end
 

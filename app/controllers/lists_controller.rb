@@ -22,8 +22,8 @@ class ListsController < ApplicationController
             @list = List.new
             @list.excerpts.build
         else
-            redirect_to lists_path
             flash[:message] = "Admin Access Only"
+            redirect_to lists_path
         end
     end 
 
@@ -32,8 +32,8 @@ class ListsController < ApplicationController
         if @list.save
             redirect_to list_path(@list)
         else
-            render 'new'
             flash[:message] = "Invalid List Params"
+            render 'new'
         end
     end 
 
@@ -41,8 +41,8 @@ class ListsController < ApplicationController
         if admin?
             @list = List.find(params[:id])
         else
-            redirect_to list_path(params[:id])
             flash[:message] = "Admin Access Only"
+            redirect_to list_path(params[:id])
         end 
     end 
 
@@ -50,8 +50,8 @@ class ListsController < ApplicationController
         @list = List.find(params[:id])
         @list.update(list_params)
         if !@list.valid?
-            render :edit
             flash[:message] = "Date is Required"
+            render :edit
         elsif !params[:list][:user_ids].empty?
             redirect_to user_lists_path(user)
         else
@@ -66,10 +66,9 @@ class ListsController < ApplicationController
 
             redirect_to lists_path
         else
-            redirect_to list_path(params[:id])
             flash[:message] = "Admin Access Only"
+            redirect_to list_path(params[:id])
         end
     end
-
 
 end

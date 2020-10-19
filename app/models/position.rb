@@ -4,4 +4,6 @@ class Position < ApplicationRecord
     has_many :lists
 
     validates :title, uniqueness: true, presence: true
+
+    scope :with_lists, -> { joins(:lists).merge(List.all) }
 end

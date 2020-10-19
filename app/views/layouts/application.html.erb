@@ -13,37 +13,16 @@
     
 
   <body>
-  
+
+    <div class="topnav">
+      <%= render 'layouts/user' %>
+    </div>
+    
       <div id="main">
-
-        <div class="column left">
-          <!-- Make this a partial -->
-          
-          <div class="content shadow nav">
-            <% if !current_page? root_path %>
-              <%= link_to "Home", root_path %><br>
-            <% end %>
-
-            <% if !current_page? user_lists_path(user) %>
-              <%= link_to "My Lists", user_lists_path(user) %><br>
-            <% end %>
-
-            <% if !login_or_signup_path %>
-              <% if !logged_in? %>
-                <%= link_to "Sign Up",  '/signup'%><br>
-                <%= link_to "Log In",  '/login'%><br>
-              <% else %>
-                <%= link_to "Log Out", '/logout' %><br>
-              <% end %>
-            <% end %>
-          </div>
+        <div class="column left"> 
 
           <div class="content shadow nav">
-            <h3>Lists By Instrument</h3>
-              <% Instrument.all.each do |instrument| %>
-                  <%= link_to "#{instrument.name}", instrument_lists_path(instrument) %><br>
-              <% end %>
-              <h4><%= link_to "All Lists", lists_path %></h4>
+            <%= render 'layouts/instruments' %>
           </div>
 
           <div class="content shadow">
@@ -51,10 +30,15 @@
             <%= link_to "New List", new_list_path %><br>
             <%= link_to "Library", '/library' %><br>
           </div>
-
         </div>
 
         <div class="column right">
+          <% flash.each do |type, msg| %>
+            <div class="error">
+              <%= msg %>
+            </div>
+          <% end %>
+
           <%= yield %>
         </div>
 
