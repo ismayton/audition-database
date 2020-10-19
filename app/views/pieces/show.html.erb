@@ -1,11 +1,15 @@
-<h2><%= @piece.title %></h2>
-<h4>Composer: <%= link_to "#{@piece.composer.name}", composer_path(@piece.composer) %></h4>
+<div class="content shadow">
+    <h2><%= @piece.title %></h2>
+    <h4>Composer: <%= link_to "#{@piece.composer.name}", composer_path(@piece.composer) %></h4>
 
-<% @piece.excerpts.each do |e| %>
-    <%= link_to "#{full_title(e)}", excerpt_path(e) %><br>
-<% end %>
+    <% @piece.excerpts.each do |e| %>
+        <%= link_to "#{full_title(e)}", excerpt_path(e) %><br>
+    <% end %>
+</div>
 
 <% if admin? %>
-    <%= link_to "Edit Piece", edit_piece_path %><br> 
-    <%= button_to "Delete Piece", piece_path, method: :delete, data: { confirm: "Are you sure?" } %>
+    <div class="content admin">
+        <%= button_to "Edit Piece", edit_piece_path, method: :get %><br> 
+        <%= button_to "Delete Piece", piece_path, method: :delete, data: { confirm: "Are you sure?" } %>
+    </div>
 <% end %>

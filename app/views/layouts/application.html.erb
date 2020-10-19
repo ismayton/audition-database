@@ -10,34 +10,57 @@
   </head>
     <h1 id="header">Welcome to the Audition Archive!</h1>
 
-    <% if !current_page? root_path %>
-      <%= link_to "Home", root_path %>
-    <% end %>
+    
 
-  <body>  
-    <%= yield %>
-  </body>
-  <footer>
+  <body>
+  
+      <div id="main">
 
-    <div id="ft">
-      <div id="footer">
-        <% if !login_or_signup_path %>
-          <% if !logged_in? %>
-            <%= link_to "Sign Up",  '/signup'%><br>
-            <%= link_to "Log In",  '/login'%><br>
-          <% else %>
-            <%= link_to "Log Out", '/logout' %>
-          <% end %>
-        <% end %>
+        <div class="column left">
+          <!-- Make this a partial -->
+          
+          <div class="content shadow nav">
+            <% if !current_page? root_path %>
+              <%= link_to "Home", root_path %><br>
+            <% end %>
 
-        <% if admin? %>
-        <h2>Admin Actions</h2>
+            <% if !current_page? user_lists_path(user) %>
+              <%= link_to "My Lists", user_lists_path(user) %><br>
+            <% end %>
+
+            <% if !login_or_signup_path %>
+              <% if !logged_in? %>
+                <%= link_to "Sign Up",  '/signup'%><br>
+                <%= link_to "Log In",  '/login'%><br>
+              <% else %>
+                <%= link_to "Log Out", '/logout' %><br>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="content shadow nav">
+            <h3>Lists By Instrument</h3>
+              <% Instrument.all.each do |instrument| %>
+                  <%= link_to "#{instrument.name}", instrument_lists_path(instrument) %><br>
+              <% end %>
+              <h4><%= link_to "All Lists", lists_path %></h4>
+          </div>
+
+          <div class="content shadow">
+            <h3>Admin Menu</h3>
             <%= link_to "New List", new_list_path %><br>
-            <%= link_to "Pieces", pieces_path %><br>
-            <%= link_to "Excerpts", excerpts_path %><br>
-            <%= link_to "Composers", composers_path %><br>
-        <% end %>
-      </div>
-    </div>
+            <%= link_to "Library", '/library' %><br>
+          </div>
+
+        </div>
+
+        <div class="column right">
+          <%= yield %>
+        </div>
+
+  </div>
+  </body>
+
+  <footer>
   </footer>
 </html>

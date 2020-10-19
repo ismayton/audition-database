@@ -1,27 +1,17 @@
 <% if logged_in? %>
+    <div class="content shadow">
+        <h1>Welcome, <%= username.capitalize %></h1>
 
-<div id="bd">
-    <div id="yui-main">
-      <div class="yui-b">
-        <div class="yui-gf">
-          <div class="yui-u first">
-            <div class="content">
-                <h2>Lists By Instrument</h2>
-                <% Instrument.all.each do |instrument| %>
-                    <%= link_to "#{instrument.name}", instrument_lists_path(instrument) %><br>
-                <% end %>
-            </div>
-          </div>
-          <div class="yui-u">
-            <div class="content"><h4><%= link_to "All Lists", lists_path %></h4></div>
-          </div>
-        </div>
-      </div>
+        <h2>Your Saved Lists:</h2>
+        <% user_lists.each do |t| %>
+            <h3><%= link_to "#{full_position(t)}", list_path(t) %></h3>
+            <h4>Date: <%= display_date(t) %></h4>
+        <% end %>
+
     </div>
-    <div class="yui-b">
-      <div id="secondary"><h4><%= link_to "All Lists", lists_path %></div>
+
+<% else %>
+    <div id="content shadow">
+        <h1>Log In or Sign Up to save lists to your profile</h1>
     </div>
-  </div>
-</div>
-    
 <% end %>

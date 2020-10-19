@@ -26,6 +26,18 @@ module UsersHelper
         end
     end 
 
+    def user 
+        User.find(session[:user_id])
+    end 
+
+    def username
+        User.find(session[:user_id]).username
+    end
+
+    def user_lists
+        User.find(session[:user_id]).lists 
+    end 
+
     private
     
     def user_params

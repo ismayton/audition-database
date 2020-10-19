@@ -1,22 +1,20 @@
 <% @instruments.each do |t| %>
-    <h2><%= link_to "#{t.name}", instrument_path(t) %></h2>
-    <% t.positions.each do |o| %>
-        <% if !o.lists.empty? %>
-
-            <div>
+    <div class="content shadow">
+        <h2><%= link_to "#{t.name}", instrument_path(t) %></h2>
+        
+        <% t.positions.each do |o| %>
+            <% if !o.lists.empty? %>
                 <h4><%= link_to "#{o.title}", position_path(o) %></h4>
-            
                 <% o.lists.each do |l| %>
                     <li><%= link_to "#{ display_date(l)}", list_path(l) %></li>
                 <% end %>
-            </div>
-
+            <% end %>
         <% end %>
-    <% end %>
+    </div>
 <% end %>
 
-<div>
-    <% if admin? %>
-        <%= link_to "New Instrument", new_instrument_path %><br> 
-    <% end %>
-</div>
+<% if admin? %>
+    <div class="content admin">
+        <%= button_to "New Instrument", new_instrument_path, method: :get %><br> 
+    </div>
+<% end %>

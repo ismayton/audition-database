@@ -1,7 +1,9 @@
-<h2>Edit Instrument Class</h2>
-<%= form_for @instrument do |o| %>
-    <%= o.label "Name" %>
-    <%= o.text_field :name %><br>
-    <%= o.collection_check_boxes :position_ids, Position.all, :id, :title %><br>
-    <%= o.submit %>
-<% end %>
+<div class="content shadow">
+    <h2>Edit Instrument Class</h2>
+    <%= form_for @instrument do |o| %>
+        <%= o.label "Name" %>
+        <%= o.text_field :name %><br>
+        <%= o.collection_check_boxes :position_ids, Position.all, :id, :title %><br>
+        <%= o.submit %>
+    <% end %>
+</div>

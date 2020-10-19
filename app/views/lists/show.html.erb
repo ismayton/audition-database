@@ -1,17 +1,20 @@
 <h2><%= full_position(@list) %></h2>
 
 <h4>Date: <%= display_date(@list) %></h4>
-<h4>Excerpts:</h4>
-<ul>
-    <% @list.excerpts.each do |e| %>
-        <li><%= full_title(e) %> - <%= link_to "#{e.composer.name}", composer_path(e.composer) %></li>
-    <% end %>
-</ul>
-<%= link_to "Show All Excerpts", list_excerpts_path(@list) %><br>
-<%= link_to "Add a New Excerpt", new_list_excerpt_path(@list) %><br>
-
+<div class="content shadow">
+    <h4>Excerpts:</h4>
+    <ul>
+        <% @list.excerpts.each do |e| %>
+            <li><%= full_title(e) %> - <%= link_to "#{e.composer.name}", composer_path(e.composer) %></li>
+        <% end %>
+    </ul>
+</div>
 
 <% if admin? %>
-    <%= link_to "Edit List", edit_list_path %><br> 
-    <%= button_to "Delete List", list_path, method: :delete, data: { confirm: "Are you sure?" } %>
+    <div class="content admin">
+        <%= button_to "Show All Excerpts", list_excerpts_path(@list), method: :get %><br>
+        <%= button_to "Add a New Excerpt", new_list_excerpt_path(@list), method: :get %><br>
+        <%= button_to "Edit List", edit_list_path, method: :get %><br> 
+        <%= button_to "Delete List", list_path, method: :delete, data: { confirm: "Are you sure?" } %>
+    </div>
 <% end %>

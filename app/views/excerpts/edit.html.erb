@@ -1,10 +1,12 @@
-<h2>Edit Excerpt</h2>
-<%= form_for @excerpt do |e| %>
-    <%= e.label "Piece" %>
-    <%= e.collection_select :piece_id, Piece.all, :id, :title_and_composer, include_blank: true %><br>
+<div class="content shadow">
+    <h2>Edit Excerpt</h2>
+    <%= form_for @excerpt do |e| %>
+        <%= e.label "Piece" %>
+        <%= e.collection_select :piece_id, Piece.all, :id, :title_and_composer, include_blank: true %><br>
 
-    <%= e.label "Description" %>
-    <%= e.text_field :description %><br>
+        <%= e.label "Description" %>
+        <%= e.text_field :description %><br>
 
-    <%= e.submit %>
-<% end %>
+        <%= e.submit %>
+    <% end %>
+</div>

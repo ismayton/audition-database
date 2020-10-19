@@ -1,13 +1,15 @@
-<h2>Create a New Piece</h2>
-<%= form_for @piece do |o| %>
-    <%= o.label "Title" %>
-    <%= o.text_field :title %><br>
+<div class="content shadow">
+    <h2>Create a New Piece</h2>
+    <%= form_for @piece do |o| %>
+        <%= o.label "Title" %>
+        <%= o.text_field :title %><br>
 
-    <%= o.label "Composer" %>
-    <%= o.collection_select :composer_id, Composer.all, :id, :name, include_blank: true %><br>
-    
-    <%= o.label "New Composer" %>
-    <%= o.text_field :composer %><br>
+        <%= o.label "Composer" %>
+        <%= o.collection_select :composer_id, Composer.all, :id, :name, include_blank: true %><br>
+        
+        <%= o.label "New Composer" %>
+        <%= o.text_field :composer %><br>
 
-    <%= o.submit %>
-<% end %>
+        <%= o.submit %>
+    <% end %>
+</div>

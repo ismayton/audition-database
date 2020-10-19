@@ -1,8 +1,12 @@
-<h2><%= full_title(@excerpt) %></h2>
-<h4>Composer: <%= link_to "#{@excerpt.composer.name}", composer_path(@excerpt.composer) %></h4>
-<p>This excerpt is on <%= pluralize(number_of_lists(@excerpt), 'list') %>.</p>
+<div class="content shadow">
+    <h2><%= full_title(@excerpt) %></h2>
+    <h4>Composer: <%= link_to "#{@excerpt.composer.name}", composer_path(@excerpt.composer) %></h4>
+    <p>This excerpt is on <%= pluralize(number_of_lists(@excerpt), 'list') %>.</p>
+</div>
 
 <% if admin? %>
-    <%= link_to "Edit Excerpt", edit_excerpt_path %><br> 
-    <%= button_to "Delete Excerpt", excerpt_path, method: :delete, data: { confirm: "Are you sure?" } %>
+    <div class="content shadow admin">
+        <%= button_to "Edit Excerpt", edit_excerpt_path, method: :get %><br> 
+        <%= button_to "Delete Excerpt", excerpt_path, method: :delete, data: { confirm: "Are you sure?" } %>
+    </div>
 <% end %>

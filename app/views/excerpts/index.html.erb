@@ -1,8 +1,12 @@
 <% @excerpts.each do |t| %>
-    <h4><%= link_to "#{full_title(t)}", excerpt_path(t) %></h4>
-    <p>Composed by: <%= t.composer.name %></p>
+    <div class="content shadow">
+        <h4><%= link_to "#{full_title(t)}", excerpt_path(t) %></h4>
+        <p>Composed by: <%= t.composer.name %></p>
+    </div>
 <% end %>
 
 <% if admin? %>
-    <%= link_to "New Excerpt", new_excerpt_path %><br> 
+    <div class="content shadow admin">
+        <%= button_to "New Excerpt", new_excerpt_path, method: :get %><br> 
+    </div>
 <% end %>

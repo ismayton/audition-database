@@ -1,23 +1,33 @@
 <% if @user %>
-    <h1><%= @user.username %>'s Lists</h1>
+    <h1><%= @user.username.capitalize %>'s Lists</h1>
 <% elsif @instrument %>
-    <h1><%= @instrument.name %> Lists</h1>
+    <h1><%= @instrument.name.capitalize %> Lists</h1>
 <% end %> 
 
 <% @lists.each do |t| %>
-    <h2><%= link_to "#{full_position(t)}", list_path(t) %></h2>
-    <h4>Date: <%= display_date(t) %></h4>
-    <h4>Excerpts:</h4>
-    <ul>
-    <% t.excerpts.each do |e| %>
-        <li><%= full_title(e) %> - <%= e.composer.name %></li>
-    <% end %>
-    </ul>
-    <% if logged_in? %>
-        <%= link_to "Add to My Lists", user_lists_path(User.find(session[:user_id])) %><br>
-    <% end %>
+    <div class="content shadow">
+        <h2><%= link_to "#{full_position(t)}", list_path(t) %></h2>
+        <h4>Date: <%= display_date(t) %></h4>
+        
+        <h4>Excerpts:</h4>
+        <ul>
+        <% t.excerpts.each do |e| %>
+            <li><%= full_title(e) %> - <%= e.composer.name %></li>
+        <% end %>
+        </ul>
+        
+        <% if logged_in? && !user.lists.include?(t) %>
+            <%= form_for t do |list| %>
+                <%= list.hidden_field :user_ids, :value => user.id %>
+                <%= list.submit "Add to My Lists" %> 
+            <% end %>
+        <% end %>
+
+    </div> 
 <% end %>
 
 <% if admin? %>
-    <%= link_to "New List", new_list_path %><br> 
+    <div class="content admin">
+        <%= button_to "New List", new_list_path, method: :get %><br> 
+    </div>
 <% end %>

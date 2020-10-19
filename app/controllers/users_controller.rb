@@ -18,5 +18,10 @@ class UsersController < ApplicationController
             render '/signup'
         end
     end  
+
+    def edit 
+        binding.pry
+    end 
+
  
 end 

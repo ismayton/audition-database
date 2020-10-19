@@ -1,22 +1,26 @@
-<h2>Create a New List</h2>
-<%= form_for @list do |o| %>
-    <%= o.label "Date" %>
-    <%= o.date_field :date %><br>
+<div class="content shadow">
+    <h2>Create a New List</h2>
+    <%= form_for @list do |o| %>
+        <%= o.label "Date" %>
+        <%= o.date_field :date %><br>
 
-    <%= o.label "Orchestra" %>
-    <%= o.collection_select :orchestra_id, Orchestra.all, :id, :name %><br>
-    <%= o.label "Position" %>
-    <%= o.collection_select :position_id, Position.all, :id, :title %><br>
+        <%= o.label "Orchestra" %>
+        <%= o.collection_select :orchestra_id, Orchestra.all, :id, :name %><br>
+        <%= o.label "Position" %>
+        <%= o.collection_select :position_id, Position.all, :id, :title %><br>
+</div>
+        
+<div class="content shadow">
+        <h4>Create New Excerpts for this List</h4>
+        <%= o.fields_for :excerpts do |e| %>
 
-    <h4>Create New Excerpts for this List</h4>
-    <%= o.fields_for :excerpts do |e| %>
+            <%= e.label "Piece" %>
+            <%= e.collection_select :piece_id, Piece.all, :id, :title_and_composer, include_blank: true %><br>
 
-        <%= e.label "Piece" %>
-        <%= e.collection_select :piece_id, Piece.all, :id, :title_and_composer, include_blank: true %><br>
+            <%= e.label "Description" %>
+            <%= e.text_field :description %><br>
+        <% end %>
 
-        <%= e.label "Description" %>
-        <%= e.text_field :description %><br>
+        <%= o.submit %>
     <% end %>
-
-    <%= o.submit %>
-<% end %>
+</div>

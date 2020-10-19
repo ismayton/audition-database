@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_181612) do
+ActiveRecord::Schema.define(version: 2020_10_19_184819) do
 
   create_table "composers", force: :cascade do |t|
     t.string "name"
@@ -45,6 +45,11 @@ ActiveRecord::Schema.define(version: 2020_10_16_181612) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["orchestra_id"], name: "index_lists_on_orchestra_id"
     t.index ["position_id"], name: "index_lists_on_position_id"
+  end
+
+  create_table "lists_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "list_id", null: false
   end
 
   create_table "orchestras", force: :cascade do |t|

@@ -1,12 +1,16 @@
-<h2><%= @composer.name %></h2>
+<div class="content shadow">
+    <h2><%= @composer.name %></h2>
 
-<ul>
-    <% @composer.excerpts.each do |e| %>
-        <li><%= full_title(e) %> - Lists: <%= e.lists.count %></li>
-    <% end %>
-</ul>
+    <ul>
+        <% @composer.excerpts.each do |e| %>
+            <li><%= full_title(e) %> - Lists: <%= e.lists.count %></li>
+        <% end %>
+    </ul>
+</div>
 
 <% if admin? %>
-    <%= link_to "Edit Composer", edit_composer_path %><br> 
-    <%= button_to "Delete Composer", composer_path, method: :delete, data: { confirm: "Are you sure?" } %>
+    <div class="content shadow admin">
+        <%= button_to "Edit Composer", edit_composer_path, method: :get %><br> 
+        <%= button_to "Delete Composer", composer_path, method: :delete, data: { confirm: "Are you sure?" } %>
+    </div>
 <% end %>

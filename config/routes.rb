@@ -6,14 +6,15 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/signup', to: 'users#new'
   get '/logout', to: 'sessions#delete'
-
+  get '/library', to: 'sessions#library'
+  
   resources :orchestras, :positions, :excerpts, :composers, :pieces, :instruments
   
   resources :instruments do 
     resources :lists, only: [:index]
   end 
   
-  resources :users, only: [:new, :create] do
+  resources :users, only: [:new, :create, :edit] do
     resources :lists, only: [:index]
   end 
 

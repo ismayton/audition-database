@@ -1,14 +1,20 @@
 <% @pieces.each do |t| %>
 
-    <h4><%= link_to "#{t.title}", piece_path(t) %></h4>
-    <p>Composer: <%= t.composer.name %></p>
+    <div class="content shadow">
+        <h3><%= link_to "#{t.title}", piece_path(t) %> - <%= t.composer.name %></h3>
 
-    <% t.excerpts.each do |e| %>
-        <%= link_to "#{full_title(e)}", excerpt_path(e) %><br>
-    <% end %>
+        <h4>Excerpts:</h4>
+        <ul>
+            <% t.excerpts.each do |e| %>
+                <li><%= link_to "#{e.description}", excerpt_path(e) %></li>
+            <% end %>
+        </ul>
+    </div>
 
 <% end %>
 
 <% if admin? %>
-    <%= link_to "New Piece", new_piece_path %><br> 
+    <div class="content admin">
+        <%= button_to "New Piece", new_piece_path, method: :get %><br> 
+    </div>
 <% end %>

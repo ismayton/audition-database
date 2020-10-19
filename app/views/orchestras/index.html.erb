@@ -1,5 +1,6 @@
+
 <% @orchestras.each do |t| %>
-    <div>
+    <div class="content shadow">
         <h3><%= link_to "#{t.name}", orchestra_path(t) %></h3>
 
 
@@ -12,6 +13,10 @@
     </div>
 <% end %>
 
+
+
 <% if admin? %>
-    <%= link_to "New Orchestra", new_orchestra_path %><br> 
+    <div class="content admin">
+        <%= button_to "New Orchestra", new_orchestra_path, method: :get %><br> 
+    </div>
 <% end %>

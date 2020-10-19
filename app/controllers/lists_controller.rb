@@ -48,12 +48,14 @@ class ListsController < ApplicationController
 
     def update 
         @list = List.find(params[:id])
-        if !params[:list][:date].empty?
-            @list.update(list_params)
-            redirect_to list_path(@list)
-        else
+        @list.update(list_params)
+        if !@list.valid?
             render :edit
-            flash[:message] = "Date is Required" 
+            flash[:message] = "Date is Required"
+        elsif !params[:list][:user_ids].empty?
+            redirect_to user_lists_path(user)
+        else
+            redirect_to list_path(@list)
         end 
     end 
 
