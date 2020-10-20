@@ -8,15 +8,15 @@ After cloning, be sure to run `bundle install`.
 
 * Rails version 6.0.3
 
-* Database creation
+## Database Creation
 
 To create the database, run `rake db:migrate`.
 
-* Database initialization
+## Database Initialization
 
-To populate the database with Orchestras, Instruments, and Positions, run `rake db:seed`.
+To populate the database with Orchestras, Instruments, and Positions, run `rake db:seed`. The seed file includes seeds for all ICSOM orchestras and the most common orchestra positions. For combined positions and european position naming conventions, more positions may need to be created in the app.
 
-* Adding Lists to the Database
+## Adding Lists to the Database
 
 After creating an admin profile using the Signup form, the simplest process to creeate a list is;
 
