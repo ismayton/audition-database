@@ -1,7 +1,7 @@
 class UsersController < ApplicationController 
 
     def new
-        if logged_in?
+        if @current_user
             flash[:message] = "Already Logged In!"
             redirect_to root_path
         else    
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect_to '/'
         else
-            render '/signup'
+            render :new
         end
     end  
 end 
