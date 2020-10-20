@@ -3,13 +3,12 @@
         <h2><%= link_to "#{t.name}", instrument_path(t) %></h2>
         
         <% t.positions.each do |o| %>
-            <% if !o.lists.empty? %>
-                <h4><%= link_to "#{o.title}", position_path(o) %></h4>
-                <% o.lists.each do |l| %>
-                    <li><%= link_to "#{ display_date(l)}", list_path(l) %></li>
-                <% end %>
+            <h4><%= link_to "#{o.title}", position_path(o) %></h4>
+            <% o.lists.each do |l| %>
+                <li><%= link_to "#{ display_date(l)}", list_path(l) %></li>
             <% end %>
         <% end %>
+
     </div>
 <% end %>
 

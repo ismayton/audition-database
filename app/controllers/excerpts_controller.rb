@@ -27,7 +27,7 @@ class ExcerptsController < ApplicationController
         @excerpt = Excerpt.new(excerpt_params)
         @excerpt.save
         if params[:excerpt][:list_ids]
-            redirect_to list_excerpts_path(List.find(params[:excerpt][:list_ids]))
+            redirect_to list_path(List.find(params[:excerpt][:list_ids]))
         else
             redirect_to excerpt_path(@excerpt)
         end

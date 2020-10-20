@@ -5,5 +5,5 @@ class Position < ApplicationRecord
 
     validates :title, uniqueness: true, presence: true
 
-    scope :with_lists, -> { joins(:lists).merge(List.all) }
+    scope :with_lists, -> { joins(:lists).distinct }
 end

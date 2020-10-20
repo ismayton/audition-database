@@ -2,7 +2,7 @@ class OrchestrasController < ApplicationController
     include OrchestrasHelper
     
     def index 
-        @orchestras = orchestras_with_lists
+        @orchestras = Orchestra.with_lists
     end 
 
     def show

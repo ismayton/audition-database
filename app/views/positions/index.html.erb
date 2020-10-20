@@ -2,11 +2,9 @@
     <div class="content shadow">
         <h2><%= link_to "#{t.title}", position_path(t) %></h2>
         
-        <% if !t.lists.empty? %>
-            <% t.lists.each do |l| %>
-                <h4><%= l.orchestra.name %></h4>
-                <li><%= link_to "#{ display_date(l)}", list_path(l) %></li>
-            <% end %>
+        <% t.lists.each do |l| %>
+            <h4><%= l.orchestra.name %></h4>
+            <%= link_to "#{ display_date(l)}", list_path(l) %>
         <% end %>
 
     </div>

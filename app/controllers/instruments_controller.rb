@@ -2,7 +2,7 @@ class InstrumentsController < ApplicationController
     include InstrumentsHelper
 
     def index 
-        @instruments = Instrument.all
+        @instruments = Instrument.with_lists
     end
 
     def show

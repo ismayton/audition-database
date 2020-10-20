@@ -4,7 +4,7 @@
         <%= e.hidden_field :list_ids %>
 
         <%= e.label "Piece" %>
-        <%= e.collection_select :piece_id, Piece.all, :id, :title_and_composer, include_blank: true %><br>
+        <%= e.grouped_collection_select :piece, Composer.all, :pieces, :name, :id, :title, include_blank: true %><br>
 
         <%= e.label "Description" %>
         <%= e.text_field :description %><br>
