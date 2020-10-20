@@ -3,11 +3,9 @@ class ListsController < ApplicationController
     
     def index
         if params[:user_id]
-            @user = User.find(params[:user_id])
-            @lists = @user.lists
+            @lists = @current_user.lists
         elsif params[:instrument_id]
-            @instrument = Instrument.find(params[:instrument_id])
-            @lists = @instrument.lists 
+            @lists = Instrument.find(params[:instrument_id]).lists
         else
             @lists = List.all  
         end
@@ -18,9 +16,8 @@ class ListsController < ApplicationController
     end 
 
     def new 
-        if admin?
-            @list = List.new
-            @list.excerpts.build
+        if @current_admin
+            @list = List.new(user_ids: params[:user_id])
         else
             flash[:message] = "Admin Access Only"
             redirect_to lists_path
@@ -29,16 +26,19 @@ class ListsController < ApplicationController
 
     def create 
         @list = List.new(list_params)
-        if @list.save
-            redirect_to list_path(@list)
-        else
-            flash[:message] = "Invalid List Params"
+        @list.save
+        if !@list.valid?
+            flash.now[:message] = "Invalid List Params"
             render 'new'
+        elsif params[:list][:user_ids]
+            redirect_to user_lists_path(@current_user)
+        else
+            redirect_to list_path(@list)            
         end
     end 
 
     def edit
-        if admin?
+        if @current_admin
             @list = List.find(params[:id])
         else
             flash[:message] = "Admin Access Only"
@@ -50,17 +50,17 @@ class ListsController < ApplicationController
         @list = List.find(params[:id])
         @list.update(list_params)
         if !@list.valid?
-            flash[:message] = "Date is Required"
+            flash.now[:message] = "Date is Required"
             render :edit
         elsif !params[:list][:user_ids].empty?
-            redirect_to user_lists_path(user)
+            redirect_to user_lists_path(@current_user)
         else
             redirect_to list_path(@list)
         end 
     end 
 
     def destroy
-        if admin?
+        if @current_admin
             @list = List.find(params[:id])
             @list.destroy
 

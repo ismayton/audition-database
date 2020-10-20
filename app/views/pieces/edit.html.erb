@@ -1,15 +1,4 @@
 <div class="content shadow">
     <h2>Edit Piece</h2>
-    <%= form_for @piece do |o| %>
-        <%= o.label "Title" %>
-        <%= o.text_field :title %><br>
-
-        <%= o.label "Composer" %>
-        <%= o.collection_select :composer_id, Composer.all, :id, :name, include_blank: true %><br>
-        
-        <%= o.label "New Composer" %>
-        <%= o.text_field :composer, value: nil %><br>
-
-        <%= o.submit %>
-    <% end %>
+    <%= render 'form' %>
 </div>

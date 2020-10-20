@@ -9,7 +9,6 @@ body {
 }
 
 h1, h2, h3, h4 {
-    margin-block-start: 0;
 }
 
 #header{
@@ -36,7 +35,7 @@ h1, h2, h3, h4 {
 	background: #ffffff;;
 	border-top:#FFFFFF 2px solid;
 	margin:20px auto;
-    padding:20px;
+    padding:0 20px 20px 20px;
     border-radius: 8px;
 	}
     
@@ -114,7 +113,6 @@ input {
       float: right;
   }
 
-  .error {
-      background-color: rgba(255, 0, 0, 0.712);
-      
+  .error, .field_with_errors {
+      background-color: rgba(255, 0, 0, 0.719);
   }

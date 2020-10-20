@@ -1,3 +1,5 @@
+<h1>Positions Index</h1>
+
 <% @positions.each do |t| %>
     <div class="content shadow">
         <h2><%= link_to "#{t.title}", position_path(t) %></h2>
@@ -10,7 +12,7 @@
     </div>
 <% end %>
 
-<% if admin? %>
+<% if @current_admin %>
     <div class="content admin">
         <%= button_to "New Position", new_position_path, method: :get %><br> 
     </div>

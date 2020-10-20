@@ -1,14 +1,4 @@
 <div class="content shadow">
     <h2>Create a New Excerpt</h2>
-    <%= form_for @excerpt do |e| %>
-        <%= e.hidden_field :list_ids %>
-
-        <%= e.label "Piece" %>
-        <%= e.grouped_collection_select :piece, Composer.all, :pieces, :name, :id, :title, include_blank: true %><br>
-
-        <%= e.label "Description" %>
-        <%= e.text_field :description %><br>
-
-        <%= e.submit %>
-    <% end %>
+    <%= render 'form' %>
 </div>

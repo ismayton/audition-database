@@ -1,20 +1,4 @@
 module UsersHelper
-    
-    def logged_in?
-        if session[:user_id] && !!User.find_by(id: session[:user_id])
-            return true 
-        else
-            return false 
-        end 
-    end
-
-    def admin?
-        if logged_in?
-            User.find(session[:user_id]).admin 
-        else
-            false 
-        end
-    end 
 
     def login_or_signup_path
         if current_page? login_path 
@@ -26,16 +10,16 @@ module UsersHelper
         end
     end 
 
-    def user 
-        User.find(session[:user_id])
-    end 
-
     def username
-        User.find(session[:user_id]).username
+        @current_user.username
     end
 
     def user_lists
-        User.find(session[:user_id]).lists 
+        if @current_user
+            @current_user.lists
+        else
+            false
+        end 
     end 
 
     private

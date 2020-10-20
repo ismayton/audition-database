@@ -10,7 +10,7 @@ class ComposersController < ApplicationController
     end
     
     def new 
-        if admin?
+        if @current_admin
             @composer = Composer.new
         else
             flash[:message] = "Admin Access Only"
@@ -19,12 +19,17 @@ class ComposersController < ApplicationController
     end 
 
     def create 
-        @composer = Composer.create(composer_params)
-        redirect_to composer_path(@composer)
+        @composer = Composer.new(composer_params)
+        if @composer.save
+            redirect_to composer_path(@composer)
+        else
+            flash.now[:message] = "Invalid Composer Params"
+            render :new
+        end
     end 
 
     def edit
-        if admin?
+        if @current_admin
             @composer = Composer.find(params[:id])
         else
             flash[:message] = "Admin Access Only"
@@ -34,18 +39,16 @@ class ComposersController < ApplicationController
 
     def update 
         @composer = Composer.find(params[:id])
-        if !params[:composer][:name].empty?
-            @composer.update(composer_params)
+        if @composer.update(composer_params)
             redirect_to composer_path(@composer)
         else
-            flash[:message] = "Name is Required" 
+            flash.now[:message] = "Name is Required" 
             render :edit
-            
         end 
     end 
 
     def destroy
-        if admin?
+        if @current_admin
             Composer.find(params[:id]).destroy
             redirect_to composers_path
         else

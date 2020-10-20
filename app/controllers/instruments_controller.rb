@@ -10,7 +10,7 @@ class InstrumentsController < ApplicationController
     end
 
     def new 
-        if admin?
+        if @current_admin
             @instrument = Instrument.new
         else
             flash[:message] = "Admin Access Only"
@@ -19,13 +19,18 @@ class InstrumentsController < ApplicationController
     end 
 
     def create 
-        @instrument = Instrument.create(instrument_params)
-        binding.pry
-        redirect_to instrument_path(@instrument)
+        @instrument = Instrument.new(instrument_params)
+
+        if @instrument.save
+            redirect_to instrument_path(@instrument)
+        else
+            flash.now[:message] = "Invalid Instrument Params"
+            render :new 
+        end 
     end 
 
     def edit
-        if admin?
+        if @current_admin
             @instrument = Instrument.find(params[:id])
         else
             flash[:message] = "Admin Access Only"
@@ -35,17 +40,16 @@ class InstrumentsController < ApplicationController
 
     def update 
         @instrument = Instrument.find(params[:id])
-        if !params[:instrument][:name].empty?
-            @instrument.update(instrument_params)
+        if @instrument.update(instrument_params)
             redirect_to instrument_path(@instrument)
         else
-            flash[:message] = "Name is Required"
+            flash.now[:message] = "Name is Required"
             render :edit
         end 
     end 
 
     def destroy
-        if admin?
+        if @current_admin
             @instrument = Instrument.find(params[:id])
             @other = Instrument.find_or_create_by(name: "Other")
             

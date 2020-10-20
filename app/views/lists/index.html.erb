@@ -1,9 +1,5 @@
-<% if @user %>
-    <h1><%= @user.username.capitalize %>'s Lists</h1>
-<% elsif @instrument %>
-    <h1><%= @instrument.name.capitalize %> Lists</h1>
-<% end %> 
-
+<%= render 'header' %>
+     
 <% @lists.each do |t| %>
     <div class="content shadow">
         <h2><%= link_to "#{full_position(t)}", list_path(t) %></h2>
@@ -16,9 +12,9 @@
         <% end %>
         </ul>
         
-        <% if logged_in? && !user.lists.include?(t) %>
+        <% if !user_lists.include?(t) %>
             <%= form_for t do |list| %>
-                <%= list.hidden_field :user_ids, :value => user.id %>
+                <%= list.hidden_field :user_ids, :value => @current_user.id %>
                 <%= list.submit "Add to My Lists" %> 
             <% end %>
         <% end %>
@@ -26,8 +22,12 @@
     </div> 
 <% end %>
 
-<% if admin? %>
+<% if @current_admin %>
     <div class="content admin">
-        <%= button_to "New List", new_list_path, method: :get %><br> 
+        <% if params[:user_id] %>
+            <%= button_to "New List", new_user_list_path, method: :get %>
+        <% else %>
+            <%= button_to "New List", new_list_path, method: :get %> 
+        <% end %>
     </div>
 <% end %>

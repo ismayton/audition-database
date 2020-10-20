@@ -1,11 +1,4 @@
-<div id="content shadow">
+<div class="content shadow">
     <h2>Create a New Instrument Class</h2>
-    <%= form_for @instrument do |o| %>
-        <%= o.label "Name" %>
-        <%= o.text_field :name %><br>
-        <%= o.label "Positions" %>
-        <%= o.collection_check_boxes :position_ids, Position.all, :id, :title %><br>
-        
-        <%= o.submit %>
-    <% end %>
+    <%= render 'form' %>
 </div>

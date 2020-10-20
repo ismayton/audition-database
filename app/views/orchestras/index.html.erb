@@ -1,9 +1,8 @@
+<h1>Orchestra Index</h1>
 
 <% @orchestras.each do |t| %>
     <div class="content shadow">
         <h3><%= link_to "#{t.name}", orchestra_path(t) %></h3>
-
-
         <h4>Auditions:</h4>
         <ul>
             <% t.lists.each do |l| %>

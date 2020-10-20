@@ -1,8 +1,4 @@
 <div class="content shadow">
     <h2>Edit Orchestra</h2>
-    <%= form_for @orchestra do |o| %>
-        <%= o.label "Name" %>
-        <%= o.text_field :name %><br>
-        <%= o.submit %>
-    <% end %>
+    <%= render 'form' %>
 </div>

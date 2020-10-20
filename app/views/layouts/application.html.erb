@@ -20,15 +20,11 @@
     
       <div id="main">
         <div class="column left"> 
-
           <div class="content shadow nav">
             <%= render 'layouts/instruments' %>
           </div>
-
           <div class="content shadow">
-            <h3>Admin Menu</h3>
-            <%= link_to "New List", new_list_path %><br>
-            <%= link_to "Library", '/library' %><br>
+            <%= render 'layouts/library' %>
           </div>
         </div>
 
@@ -38,7 +34,6 @@
               <%= msg %>
             </div>
           <% end %>
-
           <%= yield %>
         </div>
 

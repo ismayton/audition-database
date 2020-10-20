@@ -1,6 +1,6 @@
+<h1><%= @instrument.name %></h1>
+
 <div class="content shadow">
-    <h2>All <%= @instrument.name %> Lists</h2>
-    
     <% @instrument.positions.each do |position| %>
         <% if !position.lists.empty? %>
             <h4><%= position.title %></h4>
@@ -11,7 +11,7 @@
     <% end %>
 </div>
 
-<% if admin? %>
+<% if @current_admin %>
     <div id="content admin">
         <%= button_to "Edit Instrument", edit_instrument_path, method: :get %><br> 
         <%= button_to "Delete Instrument", instrument_path, method: :delete, data: { confirm: "Are you sure?" } %>

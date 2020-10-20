@@ -1,18 +1,20 @@
+<h1>Instruments Index</h1>
+
 <% @instruments.each do |t| %>
     <div class="content shadow">
         <h2><%= link_to "#{t.name}", instrument_path(t) %></h2>
         
-        <% t.positions.each do |o| %>
-            <h4><%= link_to "#{o.title}", position_path(o) %></h4>
+        <% t.positions.with_lists.each do |o| %>
+            <h3><%= link_to "#{o.title}", position_path(o) %></h3>
             <% o.lists.each do |l| %>
-                <li><%= link_to "#{ display_date(l)}", list_path(l) %></li>
+                <p><%= link_to "#{ display_date(l)}", list_path(l) %></p>
             <% end %>
         <% end %>
 
     </div>
 <% end %>
 
-<% if admin? %>
+<% if @current_admin %>
     <div class="content admin">
         <%= button_to "New Instrument", new_instrument_path, method: :get %><br> 
     </div>

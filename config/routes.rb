@@ -14,8 +14,8 @@ Rails.application.routes.draw do
     resources :lists, only: [:index]
   end 
   
-  resources :users, only: [:new, :create] do
-    resources :lists, only: [:index]
+  resources :users, only: [:new] do
+    resources :lists, only: [:index, :new]
   end 
 
   resources :lists do 

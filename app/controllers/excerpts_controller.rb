@@ -14,7 +14,7 @@ class ExcerptsController < ApplicationController
     end
 
     def new 
-        if admin?
+        if @current_admin
             @excerpt = Excerpt.new(list_ids: params[:list_id])
             @lists = List.all
         else
@@ -26,7 +26,10 @@ class ExcerptsController < ApplicationController
     def create 
         @excerpt = Excerpt.new(excerpt_params)
         @excerpt.save
-        if params[:excerpt][:list_ids]
+        if !@excerpt.valid?
+            flash.now[:message] = "Invalid Excerpt"
+            render :new
+        elsif !params[:excerpt][:list_ids].empty?
             redirect_to list_path(List.find(params[:excerpt][:list_ids]))
         else
             redirect_to excerpt_path(@excerpt)
@@ -34,7 +37,7 @@ class ExcerptsController < ApplicationController
     end 
 
     def edit
-        if admin?
+        if @current_admin
             @excerpt = Excerpt.find(params[:id])
         else
             flash[:message] = "Admin Access Only"
@@ -54,10 +57,9 @@ class ExcerptsController < ApplicationController
     end 
 
     def destroy
-        if admin?
+        if @current_admin
             @excerpt = Excerpt.find(params[:id])
             @excerpt.destroy
-
             redirect_to excerpts_path
         else
             flash[:message] = "Admin Access Only"

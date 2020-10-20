@@ -1,12 +1,23 @@
-<div class="content shadow">
-    <% @composers.each do |t| %>
-        <h4>Composer: <%= t.name %></h4>
-        <p>Pieces: <%= t.pieces.count %></p>
-    <% end %>
-</div>
+<h1>Composers Index</h1>
 
-<% if admin? %>
-    <div class="content shadow admin">
+
+<% @composers.each do |t| %>
+    <div class="content shadow">
+        <h4>Composer: <%= link_to "#{t.name}", composer_path(t) %></h4>
+        <p>Pieces: <%= t.pieces.count %></p>
+        
+        <ul>
+            <% t.pieces.each do |p| %>
+                <li><%= link_to "#{p.title}", piece_path(p) %></li>
+            <% end %>
+        </ul>
+        
+    </div>
+<% end %>
+
+
+<% if @current_admin %>
+    <div class="content admin">
         <%= button_to "New Composer", new_composer_path, method: :get %><br> 
     </div>
 <% end %>

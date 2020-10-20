@@ -10,28 +10,30 @@ class PositionsController < ApplicationController
     end
 
     def new 
-        if admin?
+        if @current_admin
             @position = Position.new
         else
             flash[:message] = "Admin Access Only"
-            redirect_to positions_path
+            redirect_to positions_path 
         end
     end 
 
     def create 
         @position = Position.new(position_params)
-        Orchestra.all.each do |orchestra|
-            orchestra.positions << @position 
-        end
+        
         if @position.save
+            Orchestra.all.each do |orchestra|
+                orchestra.positions << @position 
+            end
             redirect_to position_path(@position)
         else
-            flash[:message] = "Failed to create position"
+            flash.now[:message] = "Failed to create position"
+            render 'new'
         end
     end 
 
     def edit
-        if admin?
+        if @current_admin
             @position = Position.find(params[:id])
         else
             flash[:message] = "Admin Access Only"
@@ -45,13 +47,13 @@ class PositionsController < ApplicationController
             @position.update(position_params)
             redirect_to position_path(@position)
         else
-            flash[:message] = "Title is Required"
+            flash.now[:message] = "Title is Required"
             render :edit
         end 
     end 
 
     def destroy
-        if admin?
+        if @current_admin
             @position = Position.find(params[:id]).destroy
             redirect_to positions_path
         else

@@ -1,6 +1,9 @@
 <% if params[:list_id] %>
-    <h2><%= full_position(List.find(params[:list_id])) %></h2>
+    <h1><%= full_position(List.find(params[:list_id])) %></h1>
+<% else %>
+    <h1>Excerpts Index</h1>
 <% end %>
+
 
 <% @excerpts.each do |t| %>
     <div class="content shadow">
@@ -9,7 +12,7 @@
     </div>
 <% end %>
 
-<% if admin? %>
+<% if @current_admin %>
     <div class="content admin">
         <%= button_to "New Excerpt", new_excerpt_path, method: :get %><br> 
     </div>

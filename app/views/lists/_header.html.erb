@@ -1,0 +1,7 @@
+<% if params[:user_id] %>
+    <h1><%= username.capitalize %>'s Lists</h1>
+<% elsif @instrument %>
+    <h1><%= @instrument.name.capitalize %> Lists</h1>
+<% else %>
+    <h1>Lists Index</h1>
+<% end %> 

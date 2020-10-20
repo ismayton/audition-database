@@ -10,7 +10,7 @@ class OrchestrasController < ApplicationController
     end   
     
     def new 
-        if admin?
+        if @current_admin
             @orchestra = Orchestra.new
         else
             flash[:message] = "Admin Access Only"
@@ -25,7 +25,7 @@ class OrchestrasController < ApplicationController
     end 
 
     def edit
-        if admin?
+        if @current_admin
             @orchestra = Orchestra.find(params[:id])
         else
             flash[:message] = "Admin Access Only"
@@ -45,7 +45,7 @@ class OrchestrasController < ApplicationController
     end 
 
     def destroy
-        if admin?
+        if @current_admin
             @orchestra = Orchestra.find(params[:id])
             @orchestra.lists.each do |list| 
                 list.destroy 

@@ -1,6 +1,6 @@
-<div class="content shadow">
-    <h2><%= @position.title %></h2>
+<h1><%= @position.title %></h1>
 
+<div class="content shadow">
     <h4>Auditions:</h4>
     <ul>
         <% @position.lists.each do |l| %>
@@ -9,7 +9,7 @@
     </ul>
 </div>
 
-<% if admin? %>
+<% if @current_admin %>
     <div class="content admin">
     <%= button_to "Edit Position", edit_position_path, method: :get %><br> 
     <%= button_to "Delete Position", position_path, method: :delete, data: { confirm: "Are you sure?" } %>

@@ -5,3 +5,7 @@
 <% end %>
 
 <h4><%= link_to "All Lists", lists_path %></h4>
+
+<% if @current_admin %>
+    <%= link_to "New List", new_list_path %>
+<% end %>

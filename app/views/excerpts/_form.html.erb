@@ -1,0 +1,11 @@
+<%= form_for @excerpt do |e| %>
+        <%= e.hidden_field :list_ids %>
+
+        <%= e.label "Piece" %>
+        <%= e.grouped_collection_select :piece_id, Composer.all, :pieces, :name, :id, :title, include_blank: true %><br>
+
+        <%= e.label "Description" %>
+        <%= e.text_field :description %><br>
+
+        <%= e.submit %>
+<% end %>
