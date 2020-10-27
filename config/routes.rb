@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/signup', to: 'users#new'
   get '/logout', to: 'sessions#delete'
+  get '/auth/facebook/callback' => 'sessions#create'
   get '/library', to: 'sessions#library'
 
   resources :orchestras, :positions, :excerpts, :composers, :pieces, :instruments
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   resources :lists do 
     resources :excerpts, only: [:index, :new]
   end
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -5,4 +5,5 @@ class Orchestra < ApplicationRecord
     validates :name, uniqueness: true, presence: true
 
     scope :with_lists, -> { joins(:lists).distinct }
+    scope :location, -> (name){ where("name LIKE ?", "%#{name}%")}
 end

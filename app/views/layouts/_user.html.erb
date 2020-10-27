@@ -12,6 +12,7 @@
 <% if !login_or_signup_path %>
   <% if !@current_user %>
     <%= link_to "Sign Up",  '/signup'%>
+    <%= link_to "Log In with Facebook", '/auth/facebook' %>
     <%= link_to "Log In",  '/login'%>
   <% else %>
     <%= link_to "Log Out", '/logout' %>

@@ -26,8 +26,7 @@ class ListsController < ApplicationController
 
     def create 
         @list = List.new(list_params)
-        @list.save
-        if !@list.valid?
+        if !@list.save
             flash.now[:message] = "Invalid List Params"
             render 'new'
         elsif params[:list][:user_ids]
