@@ -70,4 +70,11 @@ class ListsController < ApplicationController
         end
     end
 
+    private 
+    
+    def list_params
+        params.require(:list).permit(:date, :orchestra_id, :position_id, :user_ids,
+            excerpts_attributes: [:piece_id, :description]
+        )
+    end
 end

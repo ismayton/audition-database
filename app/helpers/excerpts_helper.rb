@@ -7,9 +7,5 @@ module ExcerptsHelper
         excerpt.piece.title + " - " + excerpt.description 
     end
 
-    private 
-
-    def excerpt_params
-        params.require(:excerpt).permit(:description, :piece_id, :list_ids)
-    end
+    
 end

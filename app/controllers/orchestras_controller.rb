@@ -59,4 +59,9 @@ class OrchestrasController < ApplicationController
         end
     end
 
+    private
+    
+    def orchestra_params
+        params.require(:orchestra).permit(:name)
+    end
 end

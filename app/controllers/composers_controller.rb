@@ -56,4 +56,10 @@ class ComposersController < ApplicationController
             redirect_to composer_path(params[:id])
         end
     end
+
+    private 
+
+    def composer_params
+        params.require(:composer).permit(:name)
+    end
 end

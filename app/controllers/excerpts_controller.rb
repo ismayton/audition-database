@@ -66,4 +66,10 @@ class ExcerptsController < ApplicationController
             redirect_to excerpt_path(params[:id])
         end
     end
+
+    private 
+
+    def excerpt_params
+        params.require(:excerpt).permit(:description, :piece_id, :list_ids)
+    end
 end
