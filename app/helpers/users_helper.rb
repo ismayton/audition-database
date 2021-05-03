@@ -1,5 +1,4 @@
 module UsersHelper
-
     def login_or_signup_path
         if current_page? login_path 
             return true 
@@ -21,5 +20,4 @@ module UsersHelper
             false
         end 
     end 
-
 end

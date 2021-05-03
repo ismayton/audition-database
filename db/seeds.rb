@@ -301,9 +301,6 @@ COMPOSERS = {
     "Igor Stravinsky"=> []
 }
 
-
-
-
 def populate_composers_and_pieces 
     COMPOSERS.each  do |composer_name, pieces_array| 
         composer = Composer.find_or_create_by(name: composer_name)

@@ -1,5 +1,4 @@
 class UsersController < ApplicationController 
-
     def new
         if @current_user
             flash[:message] = "Already Logged In!"

@@ -11,14 +11,14 @@
             <li><%= full_title(e) %> - <%= e.composer.name %></li>
         <% end %>
         </ul>
-        
-        <% if !user_lists.include?(t) %>
-            <%= form_for t do |list| %>
-                <%= list.hidden_field :user_ids, :value => @current_user.id %>
-                <%= list.submit "Add to My Lists" %> 
+        <% if @current_user %>
+            <% if !user_lists.include?(t) %>
+                <%= form_for t do |list| %>
+                    <%= list.hidden_field :user_ids, :value => @current_user.id %>
+                    <%= list.submit "Add to My Lists" %> 
+                <% end %>
             <% end %>
         <% end %>
-
     </div> 
 <% end %>
 
