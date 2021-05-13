@@ -65,14 +65,20 @@ h1, h2, h3, h4 {
     margin-bottom: 20px;
 }
 
+select {
+    margin: 5px;
+    border-radius: 8px;
+    border: 1px black solid;
+    padding: 4px 16px;
+}
 .column.right {
     margin-left: 230px;
     margin-right: auto;
-    height: auto;
+    height: 100%;
 }
 
 .column.right .content {
-    width:auto;
+    width: auto;
 }
 
 li {
@@ -80,10 +86,15 @@ li {
     text-align: left;
 }
 
+/* FORM FIELDS */
 input {
     margin: 5px;
     border-radius: 8px;
+    border: 1px black solid;
+    padding: 4px 16px;
 }
+
+
 
 /* The navbar container */
 .topnav {

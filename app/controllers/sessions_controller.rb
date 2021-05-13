@@ -31,7 +31,6 @@ class SessionsController < ApplicationController
                 session[:user_id] = @user.id 
                 redirect_to root_path
             else
-                binding.pry
                 flash.now[:message] = "Invalid Login"
                 render :new 
             end 

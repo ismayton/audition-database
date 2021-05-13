@@ -21,6 +21,13 @@
       <div id="main">
         <div class="column left"> 
           <div class="content shadow nav">
+            <select name="Search list by..." id="lists">
+              <option value="instrument">instrument</option>
+              <option value="position">position</option>
+              <option value="orchestra">orchestra</option>
+              <option value="all">view all</option>
+            </select>
+            <!-- render based on this dropdown, rather than list of links -->
             <%= render 'layouts/instruments' %>
           </div>
           <div class="content shadow">
