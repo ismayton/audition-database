@@ -1,5 +1,10 @@
 <h3>Lists By Instrument</h3>
-<%= select_tag 'instrument_id', options_for_select(Instrument.all.collect{ |u| [u.name, u.id] }) %>
+    <form>
+        <%= select_tag 'instrument_id', options_for_select(Instrument.with_lists.collect{ |u| [u.name, u.id] }), {include_blank: true} %>
+        <input type="submit" />
+    </form>
+
+<p><%= Instrument.find_by_id(params[:instrument_id]).name %></p>
 
 <% Instrument.with_lists.each do |instrument| %>
     <%= link_to "#{instrument.name}", instrument_lists_path(instrument) %><br>

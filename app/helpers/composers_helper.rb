@@ -1,4 +1,2 @@
-module ComposersHelper
-
-    
+module ComposersHelper  
 end

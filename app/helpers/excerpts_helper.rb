@@ -6,6 +6,4 @@ module ExcerptsHelper
     def full_title(excerpt)
         excerpt.piece.title + " - " + excerpt.description 
     end
-
-    
 end

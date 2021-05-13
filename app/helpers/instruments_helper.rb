@@ -1,3 +1,2 @@
 module InstrumentsHelper
-
 end
